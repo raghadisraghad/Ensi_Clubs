@@ -1,0 +1,25 @@
+.wrapper {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  padding:20px 20px 20px 20px;
+  background-color: var(--header-color)
+}
+
+.search input::placeholder {
+  text-align: center;
+}
+.search {
+  flex-grow: 1;
+}
+
+input {
+  height: 35px;
+  width: 400px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.logo {
+  width: 160px;
+  object-fit: contain;
+}
