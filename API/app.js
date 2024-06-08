@@ -27,7 +27,7 @@ db.once("open",()=>{
   console.log("Connected to db")
 })
 
-
+//USER - ROUTES//
 app.use(UserRoutes)
 
 app.listen(port,()=>{

@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user");
 
 //Get All users// 
-router.get("/User", async (res, req) => {
+router.get("/User", async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -14,8 +14,8 @@ router.get("/User", async (res, req) => {
   }
 });
 
-//Get userby id // 
-router.get("/User/:id", async (res, req) => {
+//Get user by id // 
+router.get("/User/:id", async (req, res) => {
     try {
       const users = await User.findById(req.param.id);
       res.status(200).json(users);
@@ -28,11 +28,11 @@ router.get("/User/:id", async (res, req) => {
 
 
 //create user//
-router.post("/User", async (res, req) => {
+router.post("/User", async (req, res) => {
     try {
       const user = new User(req.body)
       await user.save()
-      res.status(200).json({message : "Operation success ",user})
+      res.status(200).json({message : "Operation success "})
     } catch (err) {
       res.status(500).json({
         Error: err.message,
@@ -43,9 +43,12 @@ router.post("/User", async (res, req) => {
 
 //Update User// 
 
-router.put("/User/:id", async (res, req) => {
+router.put("/User/:id", async (req, res) => {
     try {
-      
+      const {id}= req.params
+      const update = req.body
+      const user = await User.findByIdAndUpdate(id,update,{new:true});
+      res.status(200).json({message: "User Updated successfuly"})
     } catch (err) {
       res.status(500).json({
         Error: err.message,
@@ -54,10 +57,12 @@ router.put("/User/:id", async (res, req) => {
   });
 
 
-//Delete user by id
-router.delete("/User", async (res, req) => {
+//Delete user by id //
+router.delete("/User:id", async (req, res) => {
     try {
-      
+      const {id}= req.params
+      const update = req.body
+      const user = await User.findByIdAndDelete(id,update,{new:true});
     } catch (err) {
       res.status(500).json({
         Error: err.message,
