@@ -1,0 +1,80 @@
+{
+  "clubs": [
+    {
+      "id": "club1",
+      "nom": "Tech Club",
+      "rate": 4.5,
+      "members": [
+        {
+          "id_user": "user1",
+          "role": "President",
+          "abscence": 2
+        },
+        {
+          "id_user": "user2",
+          "role": "Member",
+          "abscence": 0
+        }
+      ],
+      "events": [
+        {
+          "nom": "Hackathon",
+          "date": "2024-06-15",
+          "ticket": true,
+          "price": 15
+        },
+        {
+          "nom": "Workshop",
+          "date": "2024-07-10",
+          "ticket": false,
+          "price": 0
+        }
+      ],
+      "comments": [
+        {
+          "id_user": "user3",
+          "content": "Great club with lots of activities!",
+          "date": "2024-06-01"
+        }
+      ]
+    },
+    {
+      "id": "club2",
+      "nom": "Art Club",
+      "rate": 4.8,
+      "members": [
+        {
+          "id_user": "user4",
+          "role": "Secretary",
+          "abscence": 1
+        },
+        {
+          "id_user": "user5",
+          "role": "Member",
+          "abscence": 3
+        }
+      ],
+      "events": [
+        {
+          "nom": "Art Exhibition",
+          "date": "2024-06-20",
+          "ticket": true,
+          "price": 10
+        },
+        {
+          "nom": "Painting Workshop",
+          "date": "2024-07-15",
+          "ticket": false,
+          "price": 0
+        }
+      ],
+      "comments": [
+        {
+          "id_user": "user6",
+          "content": "Wonderful experience at the exhibition!",
+          "date": "2024-06-21"
+        }
+      ]
+    }
+  ]
+}
