@@ -4,6 +4,16 @@ const User = require("../models/user");
 const Club = require("../models/club");
 const Comment = require("../models/comment");
 
+//---GET all comments//
+router.get("/comment", async (res, req) => {
+  try {
+    const comments = Comment.find();
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 //---GET comments BY USER-ID METHOD----//
 router.get("/comment/:user-id", async (res, req) => {
   try {
