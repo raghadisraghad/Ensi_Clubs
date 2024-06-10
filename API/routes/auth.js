@@ -28,25 +28,39 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, userType } = req.body;
 
   try {
-    const user = await User.findOne({ username });
-    if (!user) {
+    let entity;
+    
+    if (userType === 'User') {
+      entity = await User.findOne({ username });
+    } else if (userType === 'Club') {
+      entity = await Club.findOne({ username });
+    } else {
+      return res.status(400).json({ message: "Type d'utilisateur invalide" });
+    }
+
+    if (!entity) {
       return res.status(400).json({ message: "Nom d'utilisateur incorrect" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, entity.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Mot de passe incorrect" });
     }
 
-    const token = jwt.sign({ userId: user._id }, 'votre_secret', { expiresIn: '24h' });
+    const lastActivity = Math.floor(Date.now() / 1000);
+    const expiration = lastActivity + (7 * 24 * 60 * 60);
+
+    const token = jwt.sign({ userId: user._id, lastActivity }, 'votre_secret', { expiresIn: expiration });
     res.status(200).json({ token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Erreur lors de la connexion de l'utilisateur" });
   }
 });
+
 
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
@@ -59,20 +73,18 @@ router.post('/logout', (req, res) => {
 
 router.get('/search/:searchingItem', async (req, res) => {
   const searchingItem = req.params.searchingItem;
-  const regex = new RegExp(searchingItem, 'i'); // Case-insensitive regex pattern
+  const regex = new RegExp(searchingItem, 'i');
 
   try {
     const results = await Promise.all([
-      // Replace these with your actual mongoose models and fields
       Club.find({ name: regex }),
       Club.events.find({ title: regex }),
       Notification.find({ body: regex }),
       User.find({ name: regex }),
       Comment.find({ body: regex }),
-      // Add more models as needed
     ]);
 
-    const mergedResults = results.flat(); // Flatten the array of arrays
+    const mergedResults = results.flat();
     
     res.status(200).json(mergedResults);
   } catch (error) {
