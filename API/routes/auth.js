@@ -8,7 +8,7 @@ const Club = require('../models/club');
 const Notification = require('../models/notification');
 
 router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { name, lastName, email, password, profile, phone, class: userClass, admin } = req.body;
 
   try {
     const existingUser = await User.findOne({ username });
@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ name, lastName, email, password: hashedPassword, profile, phone, class: userClass, admin });
     await newUser.save();
 
     res.status(201).json({ message: "Utilisateur créé avec succès" });
