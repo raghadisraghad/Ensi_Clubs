@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user");
 
 //Get All users// 
-router.get("/User", async (req, res) => {
+router.get("/user", async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -15,27 +15,32 @@ router.get("/User", async (req, res) => {
 });
 
 //Get user by id // 
-router.get("/User/:id", async (req, res) => {
+router.get("/user/:id", async (req, res) => {
     try {
-      const users = await User.findById(req.param.id);
+      const {id} = req.params
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).send({ error: 'User not found' });
+      }
       res.status(200).json(users);
+      
     } catch (err) {
       res.status(500).json({
-        Error: err.message,
+        message: err.message,
       });
     }
   });
 
 
 //create user//
-router.post("/User", async (req, res) => {
+router.post("/user", async (req, res) => {
     try {
       const user = new User(req.body)
       await user.save()
       res.status(200).json({message : "Operation success "})
     } catch (err) {
       res.status(500).json({
-        Error: err.message,
+        message: err.message,
       });
     }
   });
@@ -43,7 +48,7 @@ router.post("/User", async (req, res) => {
 
 //Update User// 
 
-router.put("/User/:id", async (req, res) => {
+router.put("/user/:id", async (req, res) => {
     try {
       const {id}= req.params
       const update = req.body
@@ -51,21 +56,24 @@ router.put("/User/:id", async (req, res) => {
       res.status(200).json({message: "User Updated successfuly"})
     } catch (err) {
       res.status(500).json({
-        Error: err.message,
+        message: err.message,
       });
     }
   });
 
 
 //Delete user by id //
-router.delete("/User:id", async (req, res) => {
+router.delete("/user:id", async (req, res) => {
     try {
       const {id}= req.params
-      const update = req.body
-      const user = await User.findByIdAndDelete(id,update,{new:true});
+      const user = await User.findByIdAndDelete(id);
+      if(!club){
+        res.status(404).json({message:"User Doesn't Exist !!!"})
+      }
+      res.status(200).json({message: "User Deleted successfuly"})
     } catch (err) {
       res.status(500).json({
-        Error: err.message,
+        message: err.message,
       });
     }
   });

@@ -12,8 +12,8 @@ export interface User {
 }
 
 export interface Comment {
-  user: User;
-  content: string;
+  user: User|String;
+  body: string;
   date: Date;
 }
 
@@ -26,7 +26,7 @@ export interface Event {
 }
 
 export interface Member {
-  user: User;
+  user: User|String;
   role: string;
   absence: number;
 }
