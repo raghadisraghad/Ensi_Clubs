@@ -8,27 +8,25 @@ const Club = require('../models/club');
 const Notification = require('../models/notification');
 
 router.post('/register', async (req, res) => {
-  const { name, lastName, email, password, profile, phone, class: userClass, admin } = req.body;
-
+  
   try {
-    const existingUser = await User.findOne({ username });
+    const user = new User(req.body);
+    const existingUser = await User.findOne(user.username);
     if (existingUser) {
       return res.status(400).json({ message: "Nom d'utilisateur déjà pris" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = await bcrypt.hash(user.password, 10);
+    await user.save();
 
-    const newUser = new User({ name, lastName, email, password: hashedPassword, profile, phone, class: userClass, admin });
-    await newUser.save();
-
-    res.status(201).json({ message: "Utilisateur créé avec succès" });
+    res.status(201).json({ message: "Registered Successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de l'inscription de l'utilisateur" });
+    res.status(500).json({ message: error.message });
   }
 });
 
 router.post('/login', async (req, res) => {
-  const { username, password, userType } = req.body;
+  const login = req.body;
 
   try {
     let entity;
@@ -57,7 +55,7 @@ router.post('/login', async (req, res) => {
     res.status(200).json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Erreur lors de la connexion de l'utilisateur" });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -65,13 +63,13 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ message: "Error logging out" });
+      return res.status(500).json({ message: error.message});
     }
     res.status(200).json({ message: "Logout successful" });
   });
 });
 
-router.get('/search/:searchingItem', async (req, res) => {
+/*router.get('/search/:searchingItem', async (req, res) => {
   const searchingItem = req.params.searchingItem;
   const regex = new RegExp(searchingItem, 'i');
 
@@ -90,6 +88,6 @@ router.get('/search/:searchingItem', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error searching database" });
   }
-});
+});*/
 
 module.exports = router;

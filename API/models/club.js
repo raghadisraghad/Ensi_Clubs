@@ -3,14 +3,14 @@ const Schema = mongoose.Schema;
 
 const clubSchema = new mongoose.Schema({
   //infos//
-  abrv: { type: String, required: true ,unique: true},
   name: { type: String, required: true ,unique: true},
-  email: { type: email, required: true },
+  abrv: { type: String, required: true ,unique: true},
+  email: {  type: String, required: true },
   rate: { type: Number, required: false, default: 0 },
-  logo: { type: String, required: true, default: "" },
-  slogan: { type: String, required: true,default:"",unique: true},
-  description: { type: String, required: true, default: "" },
-  sponsore: { type: String, required: false, default: "" },
+  logo: { type: String, default: "" },
+  slogan: { type: String, required: true,unique: true},
+  description: { type: String, default: "" },
+  sponsors: { type: String, required: false, default: "" },
   
   //members //
   members: {
@@ -25,7 +25,7 @@ const clubSchema = new mongoose.Schema({
     required: false,
   },
 
-  //Pvs
+  /*/Pvs
   
   pvs: {
     type: [
@@ -36,7 +36,7 @@ const clubSchema = new mongoose.Schema({
       }
     ],
     required: false,
-  },
+  },*/
 
   //events
   events: {
@@ -44,29 +44,16 @@ const clubSchema = new mongoose.Schema({
       {
         title: { type: String, required: true ,unique: true},
         date:{type:Date,required:true},
-        status:{type:String,required:true, default:0},
         description: { type: String, required: true, default: "" },
         location: { type: String, required: true, default: "" },
-        ticket:{type:Boolean,required:false},
+        ticket:{type:Boolean,default:false},
         price:{type:Number,required:false},
-        collab: { type: String, required: false, default: "" }
+        collab: [{ type: String, required: false}],
+        archived:{type:Boolean,default:false}
       }
     ],required:false
   },
-  history: {
-    type: [
-      {
-        title: { type: String, required: true },
-        date:{type:Date,required:true},
-        status:{type:String,required:true, default:0},
-        description: { type: String, required: true, default: "" },
-        location: { type: String, required: true, default: "" },
-        ticket:{type:Boolean,required:false},
-        price:{type:Number,required:false},
-        collab: { type: String, required: false, default: "" }
-      }
-    ],required:false
-  },
+ 
   //comments//
   comments:[{type:Schema.Types.ObjectId, ref: 'User',required:false }]
   
