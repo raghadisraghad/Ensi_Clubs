@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const Comment = require('../models/comment');
 const Club = require('../models/club');
 
 router.post('/registerClub', async (req, res) => {
@@ -84,24 +83,23 @@ router.post('/logout', (req, res) => {
 
 router.get('/search/:searchingItem', async (req, res) => {
   const searchingItem = req.params.searchingItem;
-  const regex = new RegExp(searchingItem, 'i');
 
   try {
-    const [clubs, users, activities] = await Promise.all([
-      Club.find({ $or: [{ name: regex }] }),
-      User.find({ $or: [{ username: regex }, { firstName: regex }, { lastName: regex }] }),
-      Activity.find({ title: regex })
+    const [clubs, users, events] = await Promise.all([
+      Club.find({ $or: [{ name: searchingItem }, { abrv: searchingItem }] }),
+      User.find({ $or: [{ username: searchingItem }, { firstName: searchingItem }, { lastName: searchingItem }] }),
+      Club.find({ 'events.title': searchingItem })
     ]);
 
     const searchResults = {
       clubs,
       users,
-      activities
+      events
     };
 
     res.status(200).json(searchResults);
   } catch (error) {
-    res.status(500).json({ message: "Error searching database" });
+    res.status(500).json({ message: "Error searching database", error: error.message });
   }
 });
 

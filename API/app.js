@@ -8,7 +8,6 @@ const EventsRoutes = require("./routes/eventsRoute")
 const MembersRoutes = require("./routes/membersRoutes")
 const PvRoutes = require("./routes/pvRoutes")
 const Auth = require("./routes/authRoutes")
-const cron = require('cron');
 
 const app = express();
 const port = 3000;
@@ -50,20 +49,24 @@ app.listen(port,()=>{
 })
 
 // Cron job to check for expired events daily at midnight
-// cron.schedule('0 0 * * *', async () => {
+// const cron = require('cron');
+// cron.schedule('* * * * *', async () => {
 //   try {
 //     const today = new Date();
 //     today.setHours(0, 0, 0, 0);
 
 //     const clubs = await Club.find({});
 //     clubs.forEach(async (club) => {
-//       const expiredEvents = club.events.filter(event => new Date(event.date) < today);
-//       club.history.push(...expiredEvents);
-//       club.events = club.events.filter(event => new Date(event.date) >= today);
+//       club.events.forEach(async (event) => {
+//         if (new Date(event.date) < today) {
+//           event.archived = true;
+//         }
+//       });
+
 //       await club.save();
 //     });
 
-//     console.log('Checked for expired events and moved them to history');
+//     console.log('Checked for expired events and updated archive status');
 //   } catch (error) {
 //     console.error('Error checking for expired events:', error);
 //   }
