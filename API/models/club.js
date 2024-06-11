@@ -6,9 +6,10 @@ const clubSchema = new mongoose.Schema({
   name: { type: String, required: true ,unique: true},
   abrv: { type: String, required: true ,unique: true},
   email: {  type: String, required: true },
+  password:{type:String,required:true},
   rate: { type: Number, required: false, default: 0 },
   logo: { type: String, default: "" },
-  slogan: { type: String, required: true,unique: true},
+  slogan: { type: String, required: true},
   description: { type: String, default: "" },
   sponsors: { type: String, required: false, default: "" },
   
@@ -25,24 +26,24 @@ const clubSchema = new mongoose.Schema({
     required: false,
   },
 
-  /*/Pvs
+  //Pvs
   
   pvs: {
     type: [
       {
         title: { type: String, required: true ,unique: true},
         file: { type: String, required: true },
-        date: { type: Date, required: true }
+        date: { type: Date, required: false, default: Date.now }
       }
     ],
     required: false,
-  },*/
+  },
 
   //events
   events: {
     type: [
       {
-        title: { type: String, required: true ,unique: true},
+        title: { type: String, required: true},
         date:{type:Date,required:true},
         description: { type: String, required: true, default: "" },
         location: { type: String, required: true, default: "" },
@@ -55,7 +56,13 @@ const clubSchema = new mongoose.Schema({
   },
  
   //comments//
-  comments:[{type:Schema.Types.ObjectId, ref: 'User',required:false }]
+  comments: [
+    {
+      user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+      content: { type: String, required: true },
+      date: { type: Date, required: false, default: Date.now }
+    }
+  ]
   
 });
 

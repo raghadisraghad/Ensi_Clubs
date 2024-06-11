@@ -7,18 +7,6 @@ const Club = require("../models/club");
 router.get("/club", async (req, res) => {
   try {
     const clubs = await Club.find()
-      .populate(
-        {
-          path: "comments",
-          select: "name lastName profile",
-          populate: {
-            path: "user",
-            select: "name lastName profile", 
-          },
-        }, 
-        { path: "members", select: "name lastName profile class" }
-      )
-      .exec();
     res.status(200).json(clubs);
   } catch (err) {
     res.status(500).json({
@@ -31,18 +19,7 @@ router.get("/club", async (req, res) => {
 router.get("/club/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const club = await Club.findById(id).populate(
-      {
-        path: "comments",
-        select: "name lastName profile",
-        populate: {
-          path: "user",
-          select: "name lastName profile", 
-        },
-      }, 
-      { path: "members", select: "name lastName profile class" }
-    )
-    .exec();
+    const club = await Club.findById(id)
     if (!club) {
       return res.status(404).send({ error: "Club doesn't exist !!!" });
     }

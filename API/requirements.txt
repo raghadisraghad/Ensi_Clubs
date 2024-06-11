@@ -1,0 +1,4 @@
+npm install
+npm install bcryptjs --save
+npm install jsonwebtoken --save
+npm install cron --save
