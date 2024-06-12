@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
