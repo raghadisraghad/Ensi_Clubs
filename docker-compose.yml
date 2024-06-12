@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Node.js application service
+  web:
+    image: node:20.14.0
+    working_dir: /app
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=Deployment
+    command: sh -c "npm install && npm start"
+
+  # MongoDB service
+  db:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456789
+    volumes:
+      - db_data:/data/db
+
+  volumes:
+    db_data:
