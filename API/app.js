@@ -7,9 +7,7 @@ const CommentsRoutes = require("./routes/commentsRoutes")
 const EventsRoutes = require("./routes/eventsRoute")
 const MembersRoutes = require("./routes/membersRoutes")
 const PvRoutes = require("./routes/pvRoutes")
-const NotificationRoutes = require("./routes/notificationRoutes")
-const Auth = require("./routes/auth")
-const Club = require('./models/club');
+const Auth = require("./routes/authRoutes")
 
 const app = express();
 const port = 3000;
@@ -28,7 +26,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 //DB Connection
-mongoose.connect('mongodb://admin:admin@localhost:27017/ensi?authsource=admin')
+mongoose.connect('mongodb://localhost:27017/ensi')
 const db = mongoose.connection;
 db.once("open",()=>{
   console.log("Connected to db")
@@ -43,7 +41,6 @@ app.use(MembersRoutes)
 app.use(EventsRoutes)
 app.use(CommentsRoutes)
 app.use(PvRoutes)
-app.use(NotificationRoutes)
 app.use(Auth)
 //-----------------//
 
@@ -52,21 +49,25 @@ app.listen(port,()=>{
 })
 
 // Cron job to check for expired events daily at midnight
-cron.schedule('0 0 * * *', async () => {
-  try {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+// const cron = require('cron');
+// cron.schedule('* * * * *', async () => {
+//   try {
+//     const today = new Date();
+//     today.setHours(0, 0, 0, 0);
 
-    const clubs = await Club.find({});
-    clubs.forEach(async (club) => {
-      const expiredEvents = club.events.filter(event => new Date(event.date) < today);
-      club.history.push(...expiredEvents);
-      club.events = club.events.filter(event => new Date(event.date) >= today);
-      await club.save();
-    });
+//     const clubs = await Club.find({});
+//     clubs.forEach(async (club) => {
+//       club.events.forEach(async (event) => {
+//         if (new Date(event.date) < today) {
+//           event.archived = true;
+//         }
+//       });
 
-    console.log('Checked for expired events and moved them to history');
-  } catch (error) {
-    console.error('Error checking for expired events:', error);
-  }
-});
+//       await club.save();
+//     });
+
+//     console.log('Checked for expired events and updated archive status');
+//   } catch (error) {
+//     console.error('Error checking for expired events:', error);
+//   }
+// });
