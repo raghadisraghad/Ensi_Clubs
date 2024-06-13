@@ -2,29 +2,57 @@ version: '3.8'
 
 services:
   # Node.js application service
-  web:
-    image: node:20.14.0
+  API:
+    image: ./API/Dockerfile
     working_dir: /app
     volumes:
-      - .:/app
+      - API:/app
     depends_on:
       - db
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=Deployment
-    command: sh -c "npm install && npm start"
+  
+  ClientProd:
+      build: ./Client/DockerfileProd  
+      ports:
+        - "80:80"  
+      volumes:
+        - client_Prod:/usr/share/nginx/html  
 
-  # MongoDB service
-  db:
-    image: mongo:4.4
+  ClientDev:
+    build: ./Client/DockerfileProd 
     ports:
-      - "27017:27017"
+        - "4200:4200"  
+    volumes:
+        - client_Dev:/app
+
+  
+  DB:
+    image: mongo:latest
+    restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123456789
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 27017:27017
     volumes:
       - db_data:/data/db
 
+  DB-monitor:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 8085:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_MONGODB_URL: DB://admin:admin@mongodb:27017/
+    depends_on:
+      - DB
+
   volumes:
     db_data:
+    client_Dev:
+    client_Prod:
