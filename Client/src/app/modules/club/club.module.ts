@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ClubRoutingModule } from './club-routing.module';
+import { ClubComponent } from './club/club.component';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    ClubRoutingModule
-  ]
+    
+  ],
+  exports: []
 })
 export class ClubModule { }

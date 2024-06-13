@@ -4,9 +4,9 @@ import { HomeComponent } from './modules/core/home/home.component';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         component:HomeComponent
-
+        
     }
       
 ];
