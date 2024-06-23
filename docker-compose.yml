@@ -14,20 +14,15 @@ services:
     environment:
       - NODE_ENV=Deployment
   
-  ClientProd:
+  Client:
       build: ./Client/DockerfileProd  
       ports:
         - "80:80"  
       volumes:
-        - client_Prod:/usr/share/nginx/html  
-
-  ClientDev:
-    build: ./Client/DockerfileProd 
-    ports:
-        - "4200:4200"  
-    volumes:
-        - client_Dev:/app
-
+        - client:/usr/share/nginx/html  
+      depends_on: 
+        - API
+  
   
   DB:
     image: mongo:latest
@@ -54,5 +49,4 @@ services:
 
   volumes:
     db_data:
-    client_Dev:
-    client_Prod:
+    client:

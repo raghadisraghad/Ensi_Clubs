@@ -7,17 +7,13 @@ import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-club',
-  standalone: true,
-  imports: [RatingModule,FormsModule,ConfirmPopupModule],
+  standalone: false,
   templateUrl: './club.component.html',
   styleUrl: './club.component.scss'
 })
 export class ClubComponent {
-confirmDelete() {
-throw new Error('Method not implemented.');
-}
-editclub() {
-throw new Error('Method not implemented.');
-}
-@Input() club!: Club;
+
+club!:Club 
+
+
 }

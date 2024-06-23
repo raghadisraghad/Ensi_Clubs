@@ -22,7 +22,7 @@ router.post('/registerClub', async (req, res) => {
   }
 });
 
-router.post('/registerUser', async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     const user = new User(req.body);
     const existingUser = await User.findOne({ username: user.username });
