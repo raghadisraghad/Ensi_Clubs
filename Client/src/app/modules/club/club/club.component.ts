@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Injectable, Input, NgModule } from '@angular/core';
 import { Club } from '../../../../types';
-import { RatingModule } from 'primeng/rating';
-import { FormsModule } from '@angular/forms';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ConfirmationService } from 'primeng/api';
+
+
 
 @Component({
   selector: 'app-club',
@@ -13,7 +11,13 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class ClubComponent {
 
+currentTab:string = "home"  
 club!:Club 
 
+selectTab(tab: string) {
+  
+  this.currentTab = tab;
+  console.log(this.currentTab);
+}
 
 }

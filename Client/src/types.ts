@@ -14,12 +14,14 @@ export interface User {
 }
 
 export interface Comment {
+  id?:string
   user: User|String;
   body: string;
   date: Date;
 }
 
 export interface Event {
+  id?:string
   name: string;
   description:string
   date: Date;
@@ -28,7 +30,8 @@ export interface Event {
 }
 
 export interface Member {
-  user: User|String;
+  id?:string
+  user: User|string;
   role: string;
   absence: number;
 }
@@ -47,10 +50,11 @@ export interface Club {
 
 export interface Clubs {
   clubs: Club[];
+  /*
   total: number;
   page: number;
   perPage: number;
-  totalPages: number;
+  totalPages: number; */
 }
 
 export interface PaginationParam {

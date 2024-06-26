@@ -1,0 +1,33 @@
+<div class="wrapper">
+<!--Slogan section-->
+<h1 class="slogan">where art and fun collide</h1>
+<!--caroussel section-->
+
+<div class="carousel">
+<p-carousel [value]="slides" [numVisible]="3" [numScroll]="3" [circular]="true">
+  <ng-template let-slide pTemplate="item">
+    
+      <div class="">
+        <img src="{{ slide.image }}" class="" />
+      </div>
+   
+  </ng-template>
+</p-carousel>
+</div>
+
+<!------------------------->
+
+<!--Description section-->
+<div class="description row full-center gap-4" >
+    
+    <div class="column">
+        <img  src="../../../../../assets/logos/ensi.png" alt="">
+    </div>
+    <div class="about-column ">
+        <h2 class="">All about art wave</h2>
+        <p class="about">The BDA, is our school's creative hub, welcoming students passionate about the arts. Through workshops, events, and projects, we celebrate diverse forms of artistic expression, fostering creativity and connection within our community. Join us to explore, collaborate, and showcase your talents!</p>
+    </div>
+</div>
+
+</div>
+

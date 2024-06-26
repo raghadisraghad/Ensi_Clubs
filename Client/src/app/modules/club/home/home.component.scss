@@ -1,0 +1,60 @@
+.wrapper{
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+h1{
+font-weight: bold;
+font-size: 96px;
+
+}
+
+h2{
+    font-weight: bold;
+    font-size: 50px;  
+}
+
+p{
+
+    font-family: "Inter", sans-serif;
+    font-size: 16px;    
+    font-weight: lighter;
+}
+
+
+
+.carousel{
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+    margin: 0 40px 40px 40px;
+    border-radius: 15px;
+}
+
+
+
+
+.slogan{
+    padding: 20px;
+    margin: 20px;
+    width: 50%;
+}
+
+
+.description{
+    background-color:#fcfcfc59;
+    padding: 40px 40px 40px 40px;
+}
+
+.gap-4{
+    gap:6rem ;
+}
+
+.about-column{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+

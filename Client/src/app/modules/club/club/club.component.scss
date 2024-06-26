@@ -1,6 +1,51 @@
 .wrapper {
     width: 100%;
-    padding:20px 20px 20px 20px;
+    padding:20px 0px 20px 0px;
     background-color: var(--header-color);
     
 }
+
+nav{
+    display: block;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    
+}
+
+ul{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    gap:2rem; 
+
+}
+
+
+li{
+    gap: 10px ;
+    background-color: #E73639;
+    padding: 5px 10px 5px 10px;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    
+    transition: transform 0.3s ease;
+    
+}
+
+
+li:hover{
+    background-color: white;
+    transform: scale(1.025, 1.025);
+}
+
+.active{
+    background-color: white;
+    transform: scale(1.1, 1.1);
+}
+
+

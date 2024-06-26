@@ -4,7 +4,7 @@ import { ClubComponent } from './club/club.component';
 
 const routes: Routes = [
   {
-    path:"test",
+    path:"",
     component:ClubComponent
   }
 ];
