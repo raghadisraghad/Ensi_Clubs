@@ -1,7 +1,0 @@
-services :
-
-API
-client-dev
-client-prod
-mongoDB
-mongo-express
