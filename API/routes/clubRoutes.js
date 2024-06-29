@@ -6,7 +6,7 @@ const Club = require("../models/club");
 //Get All clubs //
 router.get("/club", async (req, res) => {
   try {
-    const clubs = await Club.find()
+    const clubs = await Club.find().populate()
     res.status(200).json(clubs);
   } catch (err) {
     res.status(500).json({

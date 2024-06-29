@@ -1,37 +1,41 @@
-import { HttpContext, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   lastName: string;
   username: string;
   email: string;
   password: string;
-  token:string 
+  token: string;
   img: string;
   class: string;
   admin: boolean;
 }
 
 export interface Comment {
-  id?:string
-  user: User|String;
+  _id?: string;
+  user: User | String;
   body: string;
   date: Date;
 }
 
 export interface Event {
-  id?:string
-  name: string;
-  description:string
+  _id?: string;
+  title: string |"";
   date: Date;
+  description: string;
+  location: string;
   ticket: boolean;
+  collab: string[];
+  archived: Boolean;
   price: number;
+  poster: string;
 }
 
 export interface Member {
-  id?:string
-  user: User|string;
+  _id?: string;
+  user: User | string;
   role: string;
   absence: number;
 }
@@ -39,9 +43,9 @@ export interface Member {
 export interface Club {
   id: string;
   name: string;
-  bio:string;
-  logo:string;
-  slogan:string;
+  description: string;
+  logo: string;
+  slogan: string;
   rate: number;
   members: Member[];
   comments: Comment[];
@@ -58,40 +62,38 @@ export interface Clubs {
 }
 
 export interface PaginationParam {
-    [param: string]:
-      | string
-      | number
-      | boolean
-      | ReadonlyArray<string | number | boolean>;
-      page: number;
-      perPage: number;
-  }
+  [param: string]:
+    | string
+    | number
+    | boolean
+    | ReadonlyArray<string | number | boolean>;
+  page: number;
+  perPage: number;
+}
 
-
-
-  export interface Options {
-    headers?:
-      | HttpHeaders
-      | {
-          [header: string]: string | string[];
-        };
-    observe?: 'body';
-    context?: HttpContext;
-    params?:
-      | HttpParams
-      | {
-          [param: string]:
-            | string
-            | number
-            | boolean
-            | ReadonlyArray<string | number | boolean>;
-        };
-    reportProgress?: boolean;
-    responseType?: 'json';
-    withCredentials?: boolean;
-    transferCache?:
-      | {
-          includeHeaders?: string[];
-        }
-      | boolean;
-  }
+export interface Options {
+  headers?:
+    | HttpHeaders
+    | {
+        [header: string]: string | string[];
+      };
+  observe?: 'body';
+  context?: HttpContext;
+  params?:
+    | HttpParams
+    | {
+        [param: string]:
+          | string
+          | number
+          | boolean
+          | ReadonlyArray<string | number | boolean>;
+      };
+  reportProgress?: boolean;
+  responseType?: 'json';
+  withCredentials?: boolean;
+  transferCache?:
+    | {
+        includeHeaders?: string[];
+      }
+    | boolean;
+}

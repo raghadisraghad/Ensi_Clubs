@@ -1,1 +1,60 @@
-<p>activities works!</p>
+<div class="wrapper">
+    <button class="add-button"
+    type="button"
+    pButton
+    icon="pi pi-plus"
+    (click)="toggleAddPopup()"
+    label="Add Product"
+    
+  ></button>
+  <div class="grid full-center">
+    <div class="row gap-4 align-center event-card" *ngFor="let event of events" (edit)="toggleEditPopup(event)"
+    (delete)="toggleDeletePopup(event)">
+      <div class="column">
+        <img src="{{ event.poster }}" alt="" />
+      </div>
+      <div class="column full-center event-card-text">
+        <h2>
+          {{ events[0].title ? events[0].title : "" }}
+        </h2>
+        <p class="center-text">
+          {{ event.description || "" }}
+        </p>
+        <p>
+          <br /><br />
+          Date :{{ event.date }} <br />
+          ticket :{{ event.ticket }}<br />Price :{{ event.price }}
+        </p>
+        <div class="row gap-05">
+            <button type="button" (click)="editEvent(event)" pButton icon="pi pi-pencil" label="Edit"></button>
+    
+            <button
+              type="button"
+              pButton
+              (click)="confirmDelete(event)"
+              icon="pi pi-trash"
+              label="Delete"
+              #deleteButton
+            ></button>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!--add popup-->
+  <app-edit-popup
+    [(display)]="displayEditPopup"
+    header="Edit event"
+    [event]="selectedEvent"
+    (confirm)="onConfirmeEdit($event)"
+  ></app-edit-popup>
+
+  <app-edit-popup
+    [(display)]="displayAddPopup"
+    header="Add event"
+    (confirm)="onConfirmeAdd($event)"
+  ></app-edit-popup>
+</div>
+
+<p-confirmPopup></p-confirmPopup>

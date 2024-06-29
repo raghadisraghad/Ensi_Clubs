@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreRoutingModule } from './core-routing.module';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -9,7 +10,7 @@ import { HomeComponent } from './home/home.component';
   declarations: [HomeComponent],
   imports: [
     CommonModule,
-    CoreRoutingModule
+    CoreRoutingModule,HttpClientModule
   ]
 })
 export class CoreModule { }

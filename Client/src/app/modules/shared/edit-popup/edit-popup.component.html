@@ -1,0 +1,54 @@
+<p-dialog [header]="header" [(visible)]="display" [style]="{ width: 'auto', }" >
+    <div class="column gap-1 full-center">
+      <!--Name-->
+      <div class="row gap-1">
+        <span class="price-label">Title</span>
+        <input type="text" [(ngModel)]="event.title" />
+      </div>
+  
+      <!--Price-->
+      <div class="row gap-1">
+        <span class="price-label">price:</span>
+        <input type="text" [(ngModel)]="event.description" />
+      </div>
+  
+      <!--Image-->
+      <div class="row gap-1">
+        <span class="price-label">Location:</span>
+        <input type="text" [(ngModel)]="event.location" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Ticket:</span>
+        <input type="text" [(ngModel)]="event.ticket" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Prix:</span>
+        <input type="text" [(ngModel)]="event.price" />
+      </div>
+  
+      
+    </div>
+    <p-footer >
+      <div class="row full-center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        label="Confirm"
+      ></button>
+      
+      <button
+        type="button"
+        pButton
+        icon="pi pi-pencil"
+        (click)="onCancel()"
+        label="Cancel"
+      ></button>
+  </div>
+      
+    </p-footer>
+  </p-dialog>
+  

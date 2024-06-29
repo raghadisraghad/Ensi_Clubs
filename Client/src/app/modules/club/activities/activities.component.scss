@@ -1,0 +1,37 @@
+.wrapper{
+    padding: 30px;
+    height: 70vh;
+}
+
+
+.grid{
+    display: grid;
+    column-gap: 50px;
+    row-gap: 70px;
+    grid-template-columns: repeat(3, 1fr);
+    
+}
+
+.event{
+
+    padding: 20px 20px 20px 20px;
+    }
+    
+    .event-card{
+        justify-self: center;
+        justify-content: center;
+        padding: 20px 20px 20px 20px;
+        background-color: rgb(212, 67, 67);
+        border-radius: 15px;
+    }
+    
+    .next-h2{
+        width: 200px;
+        justify-self: left;
+    }
+    
+    .event-card-text{
+    width: 50%;
+    }
+    
+    
