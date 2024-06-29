@@ -1,51 +1,51 @@
 version: '3.8'
 
 services:
-  mongo:
+  mongo_club:
     image: mongo:latest
-    container_name: mongo
+    container_name: mongo_club
     restart: always
     ports:
       - "28017:27017"
     volumes:
-      - mongo_data:/data/db
+      - mongo_club_data:/data/db
     networks:
       - resApp
 
-  api:
+  api_club:
     build:
       context: ./api
       dockerfile: Dockerfile
-    container_name: api
+    container_name: api_club
     restart: always
     ports:
       - "3000:3000"
     depends_on:
-      - mongo
-    command: node server.js
+      - mongo_club
+    command: node app.js
     networks:
       - resApp
 
-  frontend:
+  client_club:
     build:
-      context: ./frontend
+      context: ./client
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: client_club
     restart: always
     ports:
       - "80:80"
     expose:
       - 80
     depends_on:
-      - api
+      - api_club
     volumes:
-      - frontend:/usr/share/nginx/html  
+      - client_club_data:/usr/share/nginx/html  
     networks:
       - resApp
 
 volumes:
-  mongo_data: {}
-  frontend:
+  mongo_club_data: {}
+  client_club_data:
 
 networks:
   resApp:
