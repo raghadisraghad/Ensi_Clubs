@@ -5,9 +5,18 @@ const clubSchema = new mongoose.Schema({
   //infos//
   name: { type: String, required: true ,unique: true},
   abrv: { type: String, required: true ,unique: true},
-  /*email: {  type: String, required: true },
-  password:{type:String,required:true},*/
-  rate: { type: Number, required: false, default: 0 },
+  email: {  type: String, required: true },
+  password:{type:String,required:true},
+  averageRate:{type:Number,required:false, default: 0},
+  rate: {
+    type: [
+      {
+        user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        rated: { type: Number, required: true, default: 0 }
+      }
+    ],
+    required: false,
+  },
   logo: { type: String, default: "" },
   slogan: { type: String, required: true,default: ""},
   description: { type: String, default: "" },

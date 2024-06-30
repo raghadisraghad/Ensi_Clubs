@@ -81,6 +81,16 @@ router.delete("/user/:id", async (req, res) => {
         console.error(`Error deleting comment for ${comm[i]._id}:`, err.message);
       }
     }
+    try {
+      await axios.delete(`http://localhost:3000/club/rate/${id}`);
+    } catch (err) {
+      console.error(`Error deleting rate for ${id}:`, err.message);
+    }
+    try {
+      await axios.delete(`http://localhost:3000/member/${id}`);
+    } catch (err) {
+      console.error(`Error deleting user from club ${id}:`, err.message);
+    }
   } catch (err) {
     res.status(500).json({
       message: err.message,
