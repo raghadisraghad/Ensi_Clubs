@@ -1,20 +1,20 @@
 <div class="wrapper">
 <!--Slogan section-->
-<h1 class="slogan">where art and fun collide</h1>
+<h1 class="slogan">{{club?.slogan}}</h1>
 <!--caroussel section-->
-
+@if(club.events[0]){
 <div class="carousel">
-<p-carousel [value]="slides" [numVisible]="3" [numScroll]="3" [circular]="true">
-  <ng-template let-slide pTemplate="item">
+<p-carousel [value]="club.events" [numVisible]="3" [numScroll]="3" [circular]="true">
+  <ng-template let-event pTemplate="item">
     
       <div class="">
-        <img src="{{ slide.image }}" class="" />
+        <img src="{{ event.poster }}" class="" />
       </div>
    
   </ng-template>
 </p-carousel>
 </div>
-
+}
 <!------------------------->
 
 <!--Description section-->
@@ -24,10 +24,32 @@
         <img  src="../../../../../assets/logos/ensi.png" alt="">
     </div>
     <div class="about-column ">
-        <h2 class="">All about art wave</h2>
-        <p class="about">The BDA, is our school's creative hub, welcoming students passionate about the arts. Through workshops, events, and projects, we celebrate diverse forms of artistic expression, fostering creativity and connection within our community. Join us to explore, collaborate, and showcase your talents!</p>
+        <h2 class="">All about {{club.name}}</h2>
+        <p class="about">{{club.description}}</p>
     </div>
 </div>
+
+<!--Next Event section-->
+@if(club.events[0]){
+<div class="column full-center event">
+    <h2 class="next-h2">Next Event</h2>
+    <div class="row gap-4 align-center event-card">
+        <div class="column">
+            <img src="../../../../../assets/logos/ensi.png" alt="">
+        </div>
+        <div class="column full-center event-card-text">
+            <h2>
+                {{club.events[0].title}}
+            </h2>
+            <p class="center-text">
+                {{club.events[0].description}}
+            </p>
+            <p>
+                <br><br> Date :{{club.events[0].date}} <br> ticket :{{club.events[0].ticket}}<br>Price:{{club.events[0].price}}
+            </p>
+        </div>
+    </div>
+</div>}
 
 </div>
 

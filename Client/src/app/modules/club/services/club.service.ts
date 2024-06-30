@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Options, User,Club,Event,Comment,Member, Clubs, } from '../../../../types';
+import { Club,Event,Comment,Member, Clubs, } from '../../../../types';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../shared/services/api.service';
 @Injectable({
@@ -8,11 +7,11 @@ import { ApiService } from '../../shared/services/api.service';
 })
 export class ClubService {
 
-apiService = inject(ApiService)
+  constructor(private apiService: ApiService) {}
 
 
 //CLUB ENDPOINTS
-getClubs = (url:string):Observable<Clubs> =>{
+getClubs = (url:string):Observable<Club[]> =>{
   return this.apiService.get(url,{responseType:'json'});
 }
 

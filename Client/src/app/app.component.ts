@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, Input } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './modules/core/header/header.component';
 import { FooterComponent } from './modules/core/footer/footer.component';
+import { Club } from '../types';
+import { SharedService } from './modules/shared/services/shared.service';
 
 
 @Component({
@@ -12,5 +14,21 @@ import { FooterComponent } from './modules/core/footer/footer.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Client';
+sharedService=inject(SharedService)
+router=inject(Router)
+currentClub!:Club
+
+ngOnInit() {
+  this.sharedService.clubSelected.subscribe((club: Club) => {
+  this.currentClub=club
+  this.sharedService.emitAppSelectedClub(this.currentClub)
+  
+    this.router.navigate(['/club'])
+
+  });
+
+  
+  
+}
+
 }

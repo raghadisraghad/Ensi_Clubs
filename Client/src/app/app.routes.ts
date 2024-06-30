@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path:'club',
+        path:'',
         loadChildren:()=>import('./modules/club/club.module').then(
           (m)=>m.ClubModule
         ),
@@ -17,12 +17,12 @@ export const routes: Routes = [
       ),
     },
 
-    {
+  /*  {
       path:"",
         loadChildren:()=>import('./modules/core/core.module').then(
           (m)=>m.CoreModule
         ),
-    }
+    }*/
 
       
 ];

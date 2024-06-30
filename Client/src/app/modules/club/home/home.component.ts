@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
+import { Club } from '../../../../types';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,8 @@ import { CarouselModule } from 'primeng/carousel';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  @Input() club!:Club
+
   
   slides = [
     { image: '../../../../assets/logos/ensi.png', caption: 'First Slide' },

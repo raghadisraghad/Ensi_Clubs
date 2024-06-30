@@ -5,11 +5,11 @@ const clubSchema = new mongoose.Schema({
   //infos//
   name: { type: String, required: true ,unique: true},
   abrv: { type: String, required: true ,unique: true},
-  email: {  type: String, required: true },
-  password:{type:String,required:true},
+  /*email: {  type: String, required: true },
+  password:{type:String,required:true},*/
   rate: { type: Number, required: false, default: 0 },
   logo: { type: String, default: "" },
-  slogan: { type: String, required: true},
+  slogan: { type: String, required: true,default: ""},
   description: { type: String, default: "" },
   sponsors: { type: String, required: false, default: "" },
   
@@ -31,7 +31,7 @@ const clubSchema = new mongoose.Schema({
   pvs: {
     type: [
       {
-        title: { type: String, required: true ,unique: true},
+        title: { type: String, required: true ,default:"",unique:false },
         file: { type: String, required: true },
         date: { type: Date, required: false, default: Date.now }
       }
@@ -50,7 +50,8 @@ const clubSchema = new mongoose.Schema({
         ticket:{type:Boolean,default:false},
         price:{type:Number,required:false},
         collab: [{ type: String, required: false}],
-        archived:{type:Boolean,default:false}
+        archived:{type:Boolean,default:false},
+        poster:{type:String,default:false}
       }
     ],required:false
   },

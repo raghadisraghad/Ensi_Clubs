@@ -8,11 +8,12 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { MembersComponent } from './members/members.component';
 import { HistoryComponent } from './history/history.component';
+import { ApiService } from '../shared/services/api.service';
 
 @NgModule({
   declarations: [ClubComponent],
   imports: [ClubRoutingModule, CommonModule,TabViewModule,ActivitiesComponent,ContactComponent,HomeComponent,MembersComponent,HistoryComponent],
   exports:[TabViewModule,],
-  providers:[],
+  providers:[ApiService],
 })
 export class ClubModule {}

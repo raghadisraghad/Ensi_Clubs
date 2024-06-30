@@ -1,6 +1,51 @@
 .wrapper {
     width: 100%;
-    padding:20px 20px 20px 20px;
+    padding:30px 30px 30px 30px;
     background-color: var(--header-color);
     
 }
+
+
+.grid{
+    display: grid;
+    column-gap: 50px;
+    row-gap: 70px;
+    grid-template-columns: repeat(3, 1fr);
+    
+}
+
+.card{
+    padding: 20px ;
+}
+
+.logo{
+    object-fit: cover;  
+}
+
+.square{
+    display: flex;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: white;
+    margin-bottom: 20px;
+    
+}
+
+h1{
+    font-weight: bold;
+    font-size: 96px;
+    
+    }
+    
+h2{
+        font-weight: bold;
+        font-size: 50px;  
+    }
+    
+p{
+    
+        font-family: "Inter", sans-serif;
+        font-size: 16px;    
+        font-weight: lighter;
+    }

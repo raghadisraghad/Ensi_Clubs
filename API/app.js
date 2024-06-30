@@ -15,7 +15,7 @@ const port = 3000;
 
 // Cors configuration - Allows requests from localhost:4200
 const corsOptions = {
-  origin: "http://localhost",
+  origin: "http://localhost:4200",
   optionsSuccessStatus: 204,
   methods: "GET, POST, PUT, DELETE",
 };
@@ -27,7 +27,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 //DB Connection
-mongoose.connect('mongodb://localhost:27017/ensi')
+mongoose.connect('mongodb://localhost:27017/Ensi')
 const db = mongoose.connection;
 db.once("open",()=>{
   console.log("Connected to db")
