@@ -82,4 +82,26 @@ router.delete("/member/:club_id/:member_id", async (req, res) => {
   }
 });
 
+router.delete("/member/:member_id", async (req, res) => {
+  try {
+    const { member_id } = req.params;
+    const clubs = await Club.find();
+    if (!clubs || clubs.length===0) {
+      return res.status(404).json({ message: "No Club Registred" });
+    }
+    for (const club of clubs) {
+      const memberIndex = club.members.findIndex(member => member.user.toString() === member_id);
+      if (memberIndex === -1) {
+        return res.status(404).json({ message: "member not found" });
+      }
+      club.members.splice(memberIndex, 1);
+      await club.save();
+    }
+    
+    res.status(200).json({ message: "Member deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;

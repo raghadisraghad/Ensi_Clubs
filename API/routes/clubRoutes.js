@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Club = require("../models/club");
-const axios = require('axios');
 
 //Get All clubs //
 router.get("/club", async (req, res) => {
@@ -60,6 +59,32 @@ router.post("/club/contact/:id", async (req, res) => {
   }
 });
 
+//add rate//
+router.post("/club/rate/:idClub", async (req, res) => {
+  try {
+    const { idClub } = req.params;
+    const { user, rate } = req.body;
+    const club = await Club.findById(idClub);
+    if (!club) {
+      return res.status(404).json({ message: "Club Not Found !!!" });
+    }
+    const existingRate = club.rate.find(r => r.user.toString() === user);
+    if (existingRate) {
+      existingRate.rated = rate;
+    } else {
+      club.rate.push({ user: user, rated: rate });
+    }
+    const totalRates = club.rate.reduce((sum, r) => sum + r.rated, 0);
+    club.averageRate=totalRates / club.rate.length;
+    await club.save();
+    const updatedClub = await Club.findById(idClub).populate('rate.user', 'name');
+    res.json({ club: updatedClub });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 //Update Club//
 router.put("/club/:id", async (req, res) => {
   try {
@@ -103,6 +128,30 @@ router.delete("/club/comment/:idClub/:idComment", async (req, res) => {
     res.status(200).json({ message: "Comment Deleted Successfully", club });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+//Delete rate //
+router.delete("/club/rate/:idUser", async (req, res) => {
+  try {
+    const { idUser } = req.params;
+    const clubs = await Club.find();
+    if (!clubs || clubs.length === 0) {
+      return res.status(404).json({ message: "No clubs found" });
+    }
+    for (const club of clubs) {
+      const initialRateCount = club.rate.length;
+      club.rate = club.rate.filter(r => !r.user.equals(idUser));
+      if (club.rate.length !== initialRateCount) {
+        const totalRates = club.rate.reduce((sum, r) => sum + r.rated, 0);
+        club.averageRate = club.rate.length > 0 ? totalRates / club.rate.length : 0;
+        await club.save();
+      }
+    }
+    res.status(200).json({ message: "User rate deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
