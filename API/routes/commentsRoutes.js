@@ -14,7 +14,6 @@ router.get("/comment", async (req, res) => {
   }
 });
 
-
 //---GET comments BY USER-ID METHOD----//
 router.get("/comment/:id", async (req, res) => {
   try {
@@ -26,7 +25,6 @@ router.get("/comment/:id", async (req, res) => {
   }
 });
 
-
 //---CREATE METHOD----//
 router.post("/comment", async (req, res) => {
   try {
@@ -37,7 +35,6 @@ router.post("/comment", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
 
 //---UPDATE METHOD----//
 router.put("/comment/:id", async (req, res) => {
@@ -54,21 +51,21 @@ router.put("/comment/:id", async (req, res) => {
   }
 });
 
-
 //---DELETE METHOD----//
 router.delete("/comment/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const comment = await Comment.findByIdAndDelete(id);
-    if (!comment) {
-      return res.status(404).json({ message: "Comment Not Found !!!" });
+    const delete_data = await Comment.findByIdAndDelete(id);
+    if (!delete_data) {
+      delete_data = await Comment.deleteMany({ user: id });
+      if (!delete_data) {
+        return res.status(404).json({ message: "Comment Not Found !!!" });
+      }
     }
     res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
-
-
 
 module.exports = router;
