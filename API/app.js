@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require('mongoose')
+const session = require('express-session');
 
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose')
 const UserRoutes = require("./routes/userRoutes")
 const ClubRoutes = require("./routes/clubRoutes")
 const CommentsRoutes = require("./routes/commentsRoutes")
@@ -13,15 +15,13 @@ const Auth = require("./routes/authRoutes")
 const app = express();
 const port = 3000;
 
-// Cors configuration - Allows requests from localhost:4200
-const corsOptions = {
-  origin: "http://localhost:4200",
-  optionsSuccessStatus: 204,
-  methods: "GET, POST, PUT, DELETE",
-};
-
-// Use cors middleware
-app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(cors());
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // Use express.json() middleware to parse JSON bodies of requests
 app.use(express.json());
