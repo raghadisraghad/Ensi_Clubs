@@ -4,7 +4,7 @@ const session = require('express-session');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
-const mongoose = require('mongoose')
+
 const dotenv =require('dotenv')
 
 dotenv.config()
@@ -21,11 +21,15 @@ const app = express();
 //Variables
 const port =process.env.PORT;
 const db_url =process.env.DB_URL;
+const  corsOptions = {
+  origin: "http://localhost:4200",
+  optiosSuccessStatus : 404,
+  methods : "GET, POST, PUT, DELETE"
+}
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(session({
-  secret: 'your_secret_key',
   resave: false,
   saveUninitialized: false,
 }));
@@ -55,6 +59,7 @@ app.use(Auth)
 app.listen(port,()=>{
   console.log("listening on port ",port)
 })
+
 
 // Cron job to check for expired events daily at midnight
 // const cron = require('cron');
