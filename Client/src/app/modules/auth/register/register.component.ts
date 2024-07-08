@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable,map,of } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { User } from '../../../../types';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -11,19 +14,25 @@ import { Observable,map,of } from 'rxjs';
 })
 export class RegisterComponent {
 fb= inject(NonNullableFormBuilder)
+authService = inject(AuthService)
+router = inject(Router)
 
 registerForm:FormGroup = this.fb.group({
   firstName:this.fb.control(''),
   lastName:this.fb.control('',{validators:[Validators.required,]}),
   class:this.fb.control('',{validators:[Validators.required,]}),
   email:this.fb.control('',{validators:[Validators.required,Validators.email]}),
+  username:this.fb.control('',{validators:[Validators.required]}),
   password:this.fb.control('',{validators:[Validators.required,Validators.minLength(8)]}),
 
 })
 
 onSubmit(){
-  console.log(this.registerForm.value);
-  
+  this.authService.register("http://localhost:3000/register",this.registerForm.getRawValue()).subscribe((res)=>{
+    localStorage.setItem('token',res.user.token)
+    this.authService.currentUserSignal.set(res.user)
+    this.router.navigate(["/"])
+  })
 }
 
 }

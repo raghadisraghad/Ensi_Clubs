@@ -1,26 +1,39 @@
-<p-dialog [header]="header" [(visible)]="display" [style]="{ width: 'auto', }" >
-    <div class="column gap-1 full-center">
+<p-dialog [header]="header" [(visible)]="display" [style]="{width:'auto', }" >
+    <div class="column gap-1 left align-center">
       <!--Name-->
       <div class="row gap-1">
         <span class="price-label">Title</span>
         <input type="text" [(ngModel)]="event.title" />
       </div>
   
-      <!--Price-->
+      <!--Description-->
       <div class="row gap-1">
-        <span class="price-label">price:</span>
+        <span class="price-label">Description:</span>
         <input type="text" [(ngModel)]="event.description" />
       </div>
   
-      <!--Image-->
+      <!--Location-->
       <div class="row gap-1">
         <span class="price-label">Location:</span>
         <input type="text" [(ngModel)]="event.location" />
       </div>
 
       <div class="row gap-1">
+        <span class="price-label">Date:</span>
+        <input type="date" [(ngModel)]="event.date" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Time:</span>
+        <input type="text" [(ngModel)]="event.time" />
+      </div>
+
+      <div class="row gap-1">
         <span class="price-label">Ticket:</span>
-        <input type="text" [(ngModel)]="event.ticket" />
+        <p>yes</p>
+        <input type="radio" value="true" [(ngModel)]="event.ticket" />
+        <p>no</p>
+        <input type="radio" value="false" [(ngModel)]="event.ticket" />
       </div>
 
       <div class="row gap-1">
@@ -31,21 +44,23 @@
       
     </div>
     <p-footer >
-      <div class="row full-center">
+      <div class="row space-around">
       <button
+        class="edit-button"
         type="button"
         pButton
         icon="pi pi-check"
         (click)="onConfirm()"
-        label="Confirm"
+        
       ></button>
       
       <button
+        class="edit-button"
         type="button"
         pButton
-        icon="pi pi-pencil"
+        icon="pi pi-times"
         (click)="onCancel()"
-        label="Cancel"
+        
       ></button>
   </div>
       

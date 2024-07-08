@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, ViewChild } from '@angular/core';
-import { Event } from '../../../../types';
+import { Component, EventEmitter, inject, Input, NgModule, Output, ViewChild } from '@angular/core';
+import { Club, Event } from '../../../../types';
 import { EditPopupComponent } from '../../shared/edit-popup/edit-popup.component';
 import { ClubService } from '../services/club.service';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-activities',
@@ -16,6 +17,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     EditPopupComponent,
     ButtonModule,
     ToastModule,
+    
   ],
   providers:[ConfirmationService],
   templateUrl: './activities.component.html',
@@ -27,8 +29,10 @@ export class ActivitiesComponent {
 edit: EventEmitter<Event> = new EventEmitter<Event>();
 delete: EventEmitter<Event> = new EventEmitter<Event>();
 
-@Input() events:Event[] = []
+@Input() club!:Club
+@Output() clubChange=new EventEmitter<Club>
 @ViewChild('deleteButton') deleteButton:any;
+events:Event[] =[]
 clubService = inject(ClubService)
 confirmationService=inject(ConfirmationService)
 displayAddPopup = false;
@@ -38,7 +42,8 @@ displayDeletePopup = false;
 selectedEvent: Event = {
   _id:"",
   title: '',
-  date: new Date,
+  date:new Date(2024,1,1),
+  time:"00:00",
   description: '',
   location: '',
   ticket: false,
@@ -74,11 +79,14 @@ onConfirmeEdit(event: Event) {
 }
 
 addEvent(event: Event) {
+  delete event._id;
+  console.log(event);
+  
   this.clubService
-    .addEvent('http://localhost:3000/event/667cc583a8cf9678c64ea801', event)
+    .addEvent(`http://localhost:3000/event/${this.club._id}`, event)
     .subscribe({
       next: (data) => {
-        console.log(data);
+        this.refreshClub() 
         
       },
 
@@ -92,10 +100,10 @@ editEvent(event: Event) {
   console.log(event);
   
   this.clubService
-    .editEvent(`http://localhost:3000/event/667cc583a8cf9678c64ea801/${event._id}`, event)
+    .editEvent(`http://localhost:3000/event/${this.club._id}/${event._id}`, event)
     .subscribe({
       next: (data) => {
-        console.log(data);
+        this.refreshClub()
         
       },
 
@@ -107,10 +115,10 @@ editEvent(event: Event) {
 
 deleteEvent(id: string) {
   this.clubService
-    .deleteEvent(`http://localhost:3000/event/667cc583a8cf9678c64ea801/${id}`)
+    .deleteEvent(`http://localhost:3000/event/${this.club._id}/${id}`)
     .subscribe({
       next: (data) => {
-        console.log(data);
+        this.refreshClub()
       },
 
       error: (error) => {
@@ -124,15 +132,46 @@ confirmDelete(event:any){
     
   this.confirmationService.confirm({
     target:this.deleteButton.nativeElement,
-    message:"are u sure ? ",accept:()=>{this.deleteEvent(event._id)}
+    message:"are u sure ? ",accept:()=>{this.deleteEvent(event._id);this.refreshClub()}
   })
 }
 
 
 ngOnInit(){
-  console.log(this.events);
+  this.events=this.club.events
+  this.events.forEach(event => {
+    event.date = this.extractDate(event.date);
+  });
+
+  
+
   
 }
+
+extractDate(dateString: any): any {
+  return dateString.split('T')[0];
+}
+
+
+refreshClub(){
+    this.clubService
+      .getClubById(`http://localhost:3000/club/${this.club._id}`)
+      .subscribe({
+        next: (club: Club) => {
+          this.club = club;
+          this.ngOnInit()
+          this.clubChange.emit(club);
+          
+          
+          
+          
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+  }
+
 
 }
 

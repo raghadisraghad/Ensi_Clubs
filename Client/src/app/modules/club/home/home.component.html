@@ -1,8 +1,8 @@
 <div class="wrapper">
 <!--Slogan section-->
-<h1 class="slogan">{{club?.slogan}}</h1>
+<h1 class="slogan">{{club.slogan}}</h1>
 <!--caroussel section-->
-@if(club.events[0]){
+@if(club.events.length != 0){
 <div class="carousel">
 <p-carousel [value]="club.events" [numVisible]="3" [numScroll]="3" [circular]="true">
   <ng-template let-event pTemplate="item">
@@ -30,7 +30,7 @@
 </div>
 
 <!--Next Event section-->
-@if(club.events[0]){
+@if(club.events.length != 0){
 <div class="column full-center event">
     <h2 class="next-h2">Next Event</h2>
     <div class="row gap-4 align-center event-card">
@@ -45,7 +45,7 @@
                 {{club.events[0].description}}
             </p>
             <p>
-                <br><br> Date :{{club.events[0].date}} <br> ticket :{{club.events[0].ticket}}<br>Price:{{club.events[0].price}}
+                <br><br>Location :{{club.events[0].location}} <br> Date :{{club.events[0].date}} <br>Time :{{club.events[0].time}} <br> ticket :{{club.events[0].ticket}}<br>Price:{{club.events[0].price}}
             </p>
         </div>
     </div>

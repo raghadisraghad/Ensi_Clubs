@@ -1,6 +1,15 @@
+
 .wrapper{
     padding: 30px;
-    height: 70vh;
+   
+}
+
+.add-button {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: rgb(66, 67, 67);
 }
 
 
@@ -8,7 +17,7 @@
     display: grid;
     column-gap: 50px;
     row-gap: 70px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     
 }
 
@@ -21,8 +30,9 @@
         justify-self: center;
         justify-content: center;
         padding: 20px 20px 20px 20px;
-        background-color: rgb(212, 67, 67);
+        background-color: rgb(255, 255, 255);
         border-radius: 15px;
+        
     }
     
     .next-h2{
@@ -31,7 +41,12 @@
     }
     
     .event-card-text{
-    width: 50%;
+        max-width:300px;
     }
     
     
+.edit-button { 
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--red)
+}

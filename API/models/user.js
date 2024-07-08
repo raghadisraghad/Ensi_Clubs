@@ -6,13 +6,14 @@ const userSchema = new mongoose.Schema({
       firstName: {type:String,required:true},
       lastName: {type:String,required:true},
       profile:{type:String,required:false},
-      phone:{type:Number,required:false},
+      phone:{type:String,required:false},
       class:{type:String,required:false},
       admin:{type:Boolean,default:false},
       //Logins
       username:{type:String,required:true,unique:true},
       email:{type:String,required:true},
       //JWT+HASH//
+      token:{type:String,required:false},
       password:{type:String,required:true}
       
 })

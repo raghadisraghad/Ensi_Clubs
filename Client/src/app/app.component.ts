@@ -14,21 +14,6 @@ import { SharedService } from './modules/shared/services/shared.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-sharedService=inject(SharedService)
-router=inject(Router)
-currentClub!:Club
 
-ngOnInit() {
-  this.sharedService.clubSelected.subscribe((club: Club) => {
-  this.currentClub=club
-  this.sharedService.emitAppSelectedClub(this.currentClub)
-  
-    this.router.navigate(['/club'])
-
-  });
-
-  
-  
-}
 
 }

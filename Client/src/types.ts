@@ -2,15 +2,19 @@ import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export interface User {
   _id: string;
-  name: string;
+  firstName: string;
   lastName: string;
+  profile: string;
+  phone:string;
+  class: string;
+  admin: boolean;
+  //auth
   username: string;
   email: string;
   password: string;
   token: string;
-  img: string;
-  class: string;
-  admin: boolean;
+  //------//
+ 
 }
 
 export interface Comment {
@@ -24,6 +28,7 @@ export interface Event {
   _id?: string;
   title: string |"";
   date: Date;
+  time:string,
   description: string;
   location: string;
   ticket: boolean;
@@ -41,7 +46,7 @@ export interface Member {
 }
 
 export interface Club {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   logo: string;

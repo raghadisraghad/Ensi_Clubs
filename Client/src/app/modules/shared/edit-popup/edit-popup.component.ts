@@ -20,6 +20,7 @@ export class EditPopupComponent {
   _id: '',
   title: '',
   date: new Date(),
+  time:"",
   description: "",
   location: '',
   ticket: false,

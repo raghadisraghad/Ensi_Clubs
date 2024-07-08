@@ -9,11 +9,12 @@ import { HomeComponent } from './home/home.component';
 import { MembersComponent } from './members/members.component';
 import { HistoryComponent } from './history/history.component';
 import { ApiService } from '../shared/services/api.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ClubComponent],
-  imports: [ClubRoutingModule, CommonModule,TabViewModule,ActivitiesComponent,ContactComponent,HomeComponent,MembersComponent,HistoryComponent],
-  exports:[TabViewModule,],
+  imports: [ClubRoutingModule,FormsModule, CommonModule,TabViewModule,ActivitiesComponent,ContactComponent,HomeComponent,MembersComponent,HistoryComponent],
+  exports:[TabViewModule,FormsModule],
   providers:[ApiService],
 })
 export class ClubModule {}
