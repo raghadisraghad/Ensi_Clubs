@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="wrapper full-center">
+
+  <div class="row full-center mt-row">
+    <img src="../../../assets/logos/ensi.png" class="logo" />
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="column full-center gap-col">
+
+      <div class="input-icons">
+        <i class="fa fa-at icon"></i>
+        <input type="text" formControlName="username"  placeholder="USERNAME" />
+      </div>
+
+      <div class="input-icons">
+        <i class="fa fa-unlock-alt icon"></i>
+        <input type="password" formControlName="password" placeholder="PASSWORD" />
+      </div>
+
+      <div>
+        <button type="submit">LOGIN</button>
+      </div>
+
+    </div>
+  </form>
+</div>

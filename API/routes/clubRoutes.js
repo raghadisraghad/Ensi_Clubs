@@ -18,7 +18,7 @@ router.get("/club", async (req, res) => {
 router.get("/club/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const club = await Club.findById(id)
+    const club = await Club.findById(id).populate()
     if (!club) {
       return res.status(404).send({ error: "Club doesn't exist !!!" });
     }

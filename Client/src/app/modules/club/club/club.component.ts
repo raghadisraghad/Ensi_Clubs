@@ -14,32 +14,28 @@ import { ClubService } from '../services/club.service';
 export class ClubComponent {
 clubService = inject(ClubService)
 currentTab:string = "home"  
-currentClub!:Club 
-
-getClub() {
-  this.clubService
-    .getClubById('http://localhost:3000/club/667cc583a8cf9678c64ea801')
-    .subscribe({
-      next: (club: Club) => {
-        this.currentClub = club;
-        console.log(club);
-        
-        
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+currentClub:Club ={
+  _id: '',
+  name: '',
+  description: '',
+  logo: '',
+  slogan: '',
+  rate: 0,
+  members: [],
+  comments: [],
+  events: []
 }
 
+
+
 ngOnInit(){
-  this.getClub()
+  this.currentClub = history.state.club
 }
 
 
 selectTab(tab: string) {
   this.currentTab = tab; 
-  console.log(tab);
+  
   
 }
 

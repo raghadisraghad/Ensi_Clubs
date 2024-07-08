@@ -1,11 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
-const Club = require('../models/club');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+const Club = require("../models/club");
+const dotenv = require("dotenv");
+dotenv.config();
+const secret_Key = process.env.SECRET_KEY;
 
-router.post('/registerClub', async (req, res) => {
+/*router.post('/registerClub', async (req, res) => {
   try {
     const club = new Club(req.body);
     const existingClub = await Club.findOne({ name: club.name });
@@ -20,9 +23,9 @@ router.post('/registerClub', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});
+}); */
 
-router.post('/register', async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const user = new User(req.body);
     const existingUser = await User.findOne({ username: user.username });
@@ -31,18 +34,24 @@ router.post('/register', async (req, res) => {
     }
 
     user.password = await bcrypt.hash(user.password, 10);
+    const payload = {
+      userId: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    };
+    const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
+    user.token = token;
     await user.save();
 
-    res.status(201).json({ message: "Registered User Successfully" });
+    res.status(201).json({ user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   const login = req.body;
-
+  
   try {
     let entity;
 
@@ -51,27 +60,38 @@ router.post('/login', async (req, res) => {
     if (!entity) {
       entity = await Club.findOne({ name: login.name });
       if (!entity) {
-        return res.status(400).json({ message: "Nom d'utilisateur incorrect" });
+        return res
+          .status(400)
+          .json({ message: "Nom d'utilisateur ou mot de passe incorrect" });
       }
     }
-    const isPasswordValid = await bcrypt.compare(login.password, entity.password);
+    const isPasswordValid = await bcrypt.compare(
+      login.password,
+      entity.password
+    );
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Mot de passe incorrect" });
+      return res
+        .status(400)
+        .json({ message: "Nom d'utilisateur ou mot de passe incorrect" });
     }
-    
-    const lastActivity = Math.floor(Date.now() / 1000);
-    const expiration = lastActivity + (7 * 24 * 60 * 60);
-    
-    const token = jwt.sign({ userId: entity._id, lastActivity }, 'votre_secret', { expiresIn: expiration });
-    res.status(200).json({ token });
 
+    /* const lastActivity = Math.floor(Date.now() / 1000); */
+    const payload = {
+      userId: entity._id,
+      firstName: entity.firstName,
+      lastName: entity.lastName,
+    };
+    const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
+    entity.token = token;
+    await User.findByIdAndUpdate(entity.id, entity);
+    res.status(200).json({ entity });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
   }
 });
 
-
+/*
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -81,25 +101,36 @@ router.post('/logout', (req, res) => {
   });
 });
 
-router.get('/search/:searchingItem', async (req, res) => {
+*/
+
+//////////////////////////////////////////////////
+router.get("/search/:searchingItem", async (req, res) => {
   const searchingItem = req.params.searchingItem;
 
   try {
     const [clubs, users, events] = await Promise.all([
       Club.find({ $or: [{ name: searchingItem }, { abrv: searchingItem }] }),
-      User.find({ $or: [{ username: searchingItem }, { firstName: searchingItem }, { lastName: searchingItem }] }),
-      Club.find({ 'events.title': searchingItem })
+      User.find({
+        $or: [
+          { username: searchingItem },
+          { firstName: searchingItem },
+          { lastName: searchingItem },
+        ],
+      }),
+      Club.find({ "events.title": searchingItem }),
     ]);
 
     const searchResults = {
       clubs,
       users,
-      events
+      events,
     };
 
     res.status(200).json(searchResults);
   } catch (error) {
-    res.status(500).json({ message: "Error searching database", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error searching database", error: error.message });
   }
 });
 

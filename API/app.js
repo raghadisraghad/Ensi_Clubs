@@ -4,6 +4,10 @@ const session = require('express-session');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
+const mongoose = require('mongoose')
+const dotenv =require('dotenv')
+
+dotenv.config()
 const UserRoutes = require("./routes/userRoutes")
 const ClubRoutes = require("./routes/clubRoutes")
 const CommentsRoutes = require("./routes/commentsRoutes")
@@ -11,9 +15,12 @@ const EventsRoutes = require("./routes/eventsRoute")
 const MembersRoutes = require("./routes/membersRoutes")
 const PvRoutes = require("./routes/pvRoutes")
 const Auth = require("./routes/authRoutes")
-
 const app = express();
-const port = 3000;
+
+
+//Variables
+const port =process.env.PORT;
+const db_url =process.env.DB_URL;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -27,7 +34,7 @@ app.use(session({
 app.use(express.json());
 
 //DB Connection
-mongoose.connect('mongodb://localhost:27017/Ensi')
+mongoose.connect(db_url)
 const db = mongoose.connection;
 db.once("open",()=>{
   console.log("Connected to db")

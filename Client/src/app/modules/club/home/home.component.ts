@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { Club } from '../../../../types';
 
@@ -12,6 +12,7 @@ import { Club } from '../../../../types';
 })
 export class HomeComponent {
   @Input() club!:Club
+  @Output() clubChange=new EventEmitter<Club>
 
   
   slides = [
@@ -23,6 +24,10 @@ export class HomeComponent {
     { image: '../../../../assets/logos/ensi.png', caption: 'Third Slide' }
   ];
 
+  ngOnInit(){
+    
+    
+  }
 
 
 //

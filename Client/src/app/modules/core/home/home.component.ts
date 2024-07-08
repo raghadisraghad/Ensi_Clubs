@@ -4,6 +4,8 @@ import { ClubService } from '../../club/services/club.service';
 import { Clubs,Club } from '../../../../types';
 import { SharedService } from '../../shared/services/shared.service';
 import { Router } from '@angular/router';
+import { state } from '@angular/animations';
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-eventService=inject(SharedService)
+
 clubApi= inject(ClubService)
 clubs:Club[]=[]
 router=inject(Router)
@@ -26,7 +28,7 @@ fetchClubs() {
     .subscribe({
       next: (clubs: Club[]) => {
         this.clubs = clubs;
-        console.log(this.clubs);
+       
       },
       error: (error) => {
         console.error(error);
@@ -38,9 +40,9 @@ ngOnInit() {
   this.fetchClubs();
 }
 
-OnselectClub(club: Club){
-this.eventService.emitClubSelected(club)
-
+OnSelectClub(club: Club){
+  
+  this.router.navigate(["/club"],{state:{club}})
 }
 
 

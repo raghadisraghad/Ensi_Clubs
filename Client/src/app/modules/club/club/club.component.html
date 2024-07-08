@@ -4,17 +4,16 @@
         <ul>
             <li (click)="selectTab('home')" [class.active]="currentTab === 'home'">Home</li>
             <li (click)="selectTab('activities')" [class.active]="currentTab === 'activities'">Activities</li>
-          <!--  <li (click)="selectTab('members')" [class.active]="currentTab === 'members'">Members</li>
-            
+            <li (click)="selectTab('members')" [class.active]="currentTab === 'members'">Members</li>
             <li (click)="selectTab('history')" [class.active]="currentTab === 'history'">History</li>
-            <li (click)="selectTab('contact')" [class.active]="currentTab === 'contact'">Contact</li>     -->
+            <li (click)="selectTab('contact')" [class.active]="currentTab === 'contact'">Contact</li>     
         </ul>
     </nav>
     <div [ngSwitch]="currentTab">
-        <app-home  *ngSwitchCase="'home'" [club]="currentClub"></app-home>
-        <app-members *ngSwitchCase="'members'"></app-members>
-        <app-activities  *ngSwitchCase="'activities'" [events]="currentClub.events"></app-activities>
-        <app-history *ngSwitchCase="'history'"></app-history>
-        <app-contact *ngSwitchCase="'contact'"></app-contact>
+        <app-home  *ngSwitchCase="'home'" [(club)]="currentClub"></app-home>
+        <app-members *ngSwitchCase="'members'" [(club)]="currentClub"></app-members>
+        <app-activities  *ngSwitchCase="'activities'" [(club)]="currentClub"></app-activities>
+        <app-history *ngSwitchCase="'history'" [(club)]="currentClub"></app-history>
+        <app-contact *ngSwitchCase="'contact'" [(club)]="currentClub"></app-contact>
     </div>    
 </div>

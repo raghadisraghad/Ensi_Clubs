@@ -1,5 +1,5 @@
 <div class="wrapper justify-center">
-    <div class="row full-center mt-row">
+    <div class="row full-center mt-row ">
       <img src="../../../assets/logos/ensi.png" class="logo">  
     </div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -9,7 +9,7 @@
 
         <div class="input-icons">
           <i class="fa fa-user icon"></i>
-          <input type="text" formControlName="firstName" placeholder="FIRST NAME" />
+          <input type="text" formControlName="firstName" placeholder="FIRSTNAME" />
           
         </div>
        
@@ -24,8 +24,8 @@
         </div>
 
         <div class="input-icons">
-          <i class="fa fa-unlock-alt icon"></i>
-          <input type="password" placeholder="PASSWORD" />
+          <i class="fa fa-at icon"></i>
+          <input type="text" formControlName="username" placeholder="USERNAME" />
         </div>
 
       </div>
@@ -33,17 +33,17 @@
       <div class="column gap-col">
         <div class="input-icons">
           <i class="fa fa-user icon"></i>
-          <input type="text" placeholder="LAST NAME" />
+          <input type="text" formControlName="lastName" placeholder="LASTNAME" />
         </div>
 
         <div class="input-icons">
           <i class="fa fa-envelope icon"></i>
-          <input type="email" placeholder="EMAIL" />
+          <input type="email" formControlName="email" placeholder="EMAIL" />
         </div>
 
         <div class="input-icons">
           <i class="fa fa-unlock-alt icon"></i>
-          <input type="password" placeholder="CONFIRM PASSWORD" />
+          <input type="password" formControlName="password" placeholder="PASSWORD" />
         </div>
       </div>
     </div>

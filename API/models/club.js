@@ -53,7 +53,8 @@ const clubSchema = new mongoose.Schema({
     type: [
       {
         title: { type: String, required: true},
-        date:{type:Date,required:true},
+        date:{type:Date,required:false},
+        time:{type:String,required:true,default:"00:00"},
         description: { type: String, required: true, default: "" },
         location: { type: String, required: true, default: "" },
         ticket:{type:Boolean,default:false},
