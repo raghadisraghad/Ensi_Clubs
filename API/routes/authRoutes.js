@@ -56,9 +56,11 @@ router.post("/login", async (req, res) => {
     let entity;
 
     entity = await User.findOne({ username: login.username });
+    const type="user";
 
     if (!entity) {
       entity = await Club.findOne({ name: login.name });
+      type="club";
       if (!entity) {
         return res
           .status(400)
@@ -83,7 +85,7 @@ router.post("/login", async (req, res) => {
     };
     const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
     entity.token = token;
-    await User.findByIdAndUpdate(entity.id, entity);
+    await User.findByIdAndUpdate(entity.id, entity, type);
     res.status(200).json({ entity });
   } catch (error) {
     console.error(error);
