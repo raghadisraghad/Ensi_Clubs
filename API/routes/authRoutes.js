@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const secret_Key = process.env.SECRET_KEY;
 
-/*router.post('/registerClub', async (req, res) => {
+router.post('/registerClub', async (req, res) => {
   try {
     const club = new Club(req.body);
     const existingClub = await Club.findOne({ name: club.name });
@@ -23,7 +23,7 @@ const secret_Key = process.env.SECRET_KEY;
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}); */
+});
 
 router.post("/register", async (req, res) => {
   try {
