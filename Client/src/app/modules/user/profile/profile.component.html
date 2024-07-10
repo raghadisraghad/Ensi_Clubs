@@ -1,21 +1,21 @@
-<div class="wrapper row gap-2">
+<div class="wrapper row gap-4">
 
 <div class="column full-center gap-1">
     <div class="square full-center">
         <img src="../../../../assets/logos/ensi.png" alt="jj" class="logo">
     </div>
     <label for="upload" class="upload">Change Picture </label>
-    <input type="file" id="upload" accept=".png;.jpeg;.jpg" class="" (change)="changeProfile($event)">
+    <input type="file" name="profile_pic" id="upload" accept=".png;.jpeg;.jpg" class="" (change)="changeProfile($event)">
     
-    <nav>
-        <ul>
+    
+        <ul class="full-center">
             <li (click)="selectTab('profile')" [class.active]="currentTab === 'profile'">Profile</li>
             <li (click)="selectTab('pv')" [class.active]="currentTab === 'pv'">PV's</li>
             <li (click)="selectTab('attendance')" [class.active]="currentTab === 'attendance'">Attendance</li>
            
                
         </ul>
-    </nav>
+    
 </div>
 
 <div class="column full-center">

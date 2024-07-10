@@ -3,21 +3,22 @@ const router = express.Router();
 const User = require("../models/user");
 const Comment = require("../models/comment");
 const Club = require("../models/club");
-const axios = require('axios');
-const multer = require('multer');
+const axios = require("axios");
+const multer = require("multer");
+const user = require("../models/user");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, 'uploads/');
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname)); // Appending extension
-  }
+    cb(null, new Date().toDateString() + "-" + file.originalname);
+  },
 });
 
 const upload = multer({ storage: storage });
 
-//Get All users// 
+//Get All users//
 router.get("/user", async (req, res) => {
   try {
     const users = await User.find();
@@ -29,68 +30,68 @@ router.get("/user", async (req, res) => {
   }
 });
 
-//Get user by id // 
+//Get user by id //
 router.get("/user/:id", async (req, res) => {
-    try {
-      const {id} = req.params
-      const user = await User.findById(id);
-      if (!user) {
-        return res.status(404).send({ error: 'User not found' });
-      }
-      res.status(200).json(user);
-    } catch (err) {
-      res.status(500).json({
-        message: err.message,
-      });
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({ error: "User not found" });
     }
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
 });
-
 
 //create user//
 router.post("/user", async (req, res) => {
-    try {
-      const user = new User(req.body)
-      await user.save()
-      res.status(200).json({message : "Operation success "})
-    } catch (err) {
-      res.status(500).json({
-        message: err.message,
-      });
-    }
-  });
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.status(200).json({ message: "Operation success " });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
 
-
-//Update User// 
+//Update User//
 
 router.put("/user/:id", async (req, res) => {
-    try {
-      const {id}= req.params
-      const update = req.body
-      const user = await User.findByIdAndUpdate(id,update,{new:true});
-      res.status(200).json({message: "User Updated successfuly"})
-    } catch (err) {
-      res.status(500).json({
-        message: err.message,
-      });
-    }
-  });
-
+  try {
+    const { id } = req.params;
+    const update = req.body;
+    const user = await User.findByIdAndUpdate(id, update, { new: true });
+    res.status(200).json({ message: "User Updated successfuly" });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
 
 //Delete user by id //
 router.delete("/user/:id", async (req, res) => {
   try {
-    const {id}= req.params
+    const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
-    if(!user){
-      res.status(404).json({message:"User Doesn't Exist !!!"})
+    if (!user) {
+      res.status(404).json({ message: "User Doesn't Exist !!!" });
     }
-    res.status(200).json({message: "User Deleted successfuly"})
+    res.status(200).json({ message: "User Deleted successfuly" });
     const comm = await Comment.find({ user: id });
     for (let i = 0; i < comm.length; i++) {
       try {
         await axios.delete(`http://localhost:3000/comment/${comm[i]._id}`);
       } catch (err) {
-        console.error(`Error deleting comment for ${comm[i]._id}:`, err.message);
+        console.error(
+          `Error deleting comment for ${comm[i]._id}:`,
+          err.message
+        );
       }
     }
     try {
@@ -108,23 +109,26 @@ router.delete("/user/:id", async (req, res) => {
       message: err.message,
     });
   }
-  });
-
-  router.put('/user/upload', upload.single('profile_pic'), async (req, res) => {
-    try {
-        const profile = new Profile({
-            name: req.body.name,
-            profile_pic: `http://<node_server_ip>:3000/uploads/${req.file.filename}`
-        });
-
-        await profile.save();
-
-        res.status(201).json({ message: 'File uploaded successfully', profile });
-    } catch (error) {
-        res.status(500).json({ message: 'File upload failed', error });
-    }
 });
 
-  //Profile Picture//
+//Profile pic
+router.post(
+  "/user/upload",
+  upload.single("profile_pic"),
+  async (req, res) => {
+    try {
+      const {id} = "668ec10cf3c50de004b830b5"
+      let update = await User.findById(id);
+      update.profile = `mamak`
+  
+      update = await User.findByIdAndUpdate(id,update,{ new: true })    
+      
+      res.status(200).json({update});
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({message : error})
+    }
+  }
+);
 
-module.exports = router
+module.exports = router;

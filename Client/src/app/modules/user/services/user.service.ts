@@ -35,4 +35,8 @@ verifyByToken(){
 
 }
 
+updateProfile(url: string,body:any):Observable<User>{
+  return this.apiService.post(url,body,{})
+}
+
 }

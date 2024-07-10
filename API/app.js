@@ -22,6 +22,7 @@ const app = express();
 //Variables
 const port =process.env.PORT;
 const db_url =process.env.DB_URL;
+//Cors Config
 const  corsOptions = {
   origin: "http://localhost:4200",
   optiosSuccessStatus : 404,
