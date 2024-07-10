@@ -4,6 +4,18 @@ const User = require("../models/user");
 const Comment = require("../models/comment");
 const Club = require("../models/club");
 const axios = require('axios');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); // Appending extension
+  }
+});
+
+const upload = multer({ storage: storage });
 
 //Get All users// 
 router.get("/user", async (req, res) => {
@@ -97,5 +109,22 @@ router.delete("/user/:id", async (req, res) => {
     });
   }
   });
+
+  router.put('/user/upload', upload.single('profile_pic'), async (req, res) => {
+    try {
+        const profile = new Profile({
+            name: req.body.name,
+            profile_pic: `http://<node_server_ip>:3000/uploads/${req.file.filename}`
+        });
+
+        await profile.save();
+
+        res.status(201).json({ message: 'File uploaded successfully', profile });
+    } catch (error) {
+        res.status(500).json({ message: 'File upload failed', error });
+    }
+});
+
+  //Profile Picture//
 
 module.exports = router

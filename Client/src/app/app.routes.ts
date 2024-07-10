@@ -22,7 +22,14 @@ export const routes: Routes = [
         loadChildren:()=>import('./modules/core/core.module').then(
           (m)=>m.CoreModule
         ),
-    }
+    },
+
+    {
+      path:"profile",
+        loadChildren:()=>import('./modules/user/user.module').then(
+          (m)=>m.UserModule
+        ),
+    },
 
       
 ];

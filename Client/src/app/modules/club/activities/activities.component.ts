@@ -143,9 +143,6 @@ ngOnInit(){
     event.date = this.extractDate(event.date);
   });
 
-  
-
-  
 }
 
 extractDate(dateString: any): any {

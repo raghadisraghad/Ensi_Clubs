@@ -1,0 +1,27 @@
+<div class="wrapper ">
+    <div class="grid full-center">
+       <div class="column card full-center" *ngFor="let member of members"  > 
+         <div class="square full-center">
+          <img class="logo" src="{{member.user.profile}}" alt="">
+          </div>
+          <h2>{{member.user.firstName}} {{member.user.lastName}}</h2>
+          <h2>{{member.role}}</h2>
+       </div>
+       <div class="row full-center">
+        <button
+          class="add-button "
+          type="button"
+          pButton
+          icon="pi pi-plus"
+          (click)="toggleAddPopup()"
+        ></button>
+      </div>
+    </div>
+    
+    <app-edit-members
+    [(display)]="displayAddPopup"
+    header="Add event"
+    (confirm)="onConfirmeAdd($event)"
+  ></app-edit-members>
+
+ </div>

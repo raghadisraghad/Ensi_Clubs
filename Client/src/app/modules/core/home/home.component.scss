@@ -1,5 +1,6 @@
 .wrapper {
     width: 100%;
+    min-height: 75vh;
     padding:30px 30px 30px 30px;
     background-color: var(--bg-color);
     
@@ -16,6 +17,10 @@
 
 .card{
     padding: 20px ;
+}
+
+.square:hover{
+    cursor: pointer;
 }
 
 .logo{

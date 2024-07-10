@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const session = require('express-session');
+const path = require('path');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
@@ -27,9 +28,11 @@ const  corsOptions = {
   methods : "GET, POST, PUT, DELETE"
 }
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(session({
+  secret:"my-secret",
   resave: false,
   saveUninitialized: false,
 }));

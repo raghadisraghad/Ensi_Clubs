@@ -5,10 +5,11 @@ const clubSchema = new mongoose.Schema({
   //infos//
   name: { type: String, required: true ,unique: true},
   abrv: { type: String, required: true ,unique: true},
-  email: {  type: String, required: true },
-  password:{type:String,required:true},
+  /*email: {  type: String, required: true },
+  password:{type:String,required:true},*/
   averageRate:{type:Number,required:false, default: 0},
-  rate: {
+  approved:{type:Boolean,default:false},
+  /*rate: {
     type: [
       {
         user: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -16,7 +17,7 @@ const clubSchema = new mongoose.Schema({
       }
     ],
     required: false,
-  },
+  },*/
   logo: { type: String, default: "" },
   slogan: { type: String, required: true,default: ""},
   description: { type: String, default: "" },
@@ -65,6 +66,7 @@ const clubSchema = new mongoose.Schema({
       }
     ],required:false
   },
+
  
   //comments//
   comments: [

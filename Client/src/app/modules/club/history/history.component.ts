@@ -17,5 +17,14 @@ export class HistoryComponent {
 
   ngOnInit(){
     this.events=this.club.events
+    this.events.forEach(event => {
+      event.date = this.extractDate(event.date);
+    });
+  
   }
+  
+  extractDate(dateString: any): any {
+    return dateString.split('T')[0];
+  }
+  
 }

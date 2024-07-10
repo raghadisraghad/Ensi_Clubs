@@ -15,14 +15,7 @@ export class HomeComponent {
   @Output() clubChange=new EventEmitter<Club>
 
   
-  slides = [
-    { image: '../../../../assets/logos/ensi.png', caption: 'First Slide' },
-    { image: '../../../../assets/logos/ensi.png', caption: 'First Slide' },
-    { image: '../../../../assets/logos/ensi.png', caption: 'First Slide' },
-    { image: '../../../../assets/logos/ensi.png', caption: 'First Slide' },
-    { image: '../../../../assets/logos/ensi.png', caption: 'Second Slide' },
-    { image: '../../../../assets/logos/ensi.png', caption: 'Third Slide' }
-  ];
+  
 
   ngOnInit(){
     

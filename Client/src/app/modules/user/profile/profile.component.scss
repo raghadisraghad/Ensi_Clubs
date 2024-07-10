@@ -1,0 +1,72 @@
+.wrapper {
+  min-height: 75vh;
+  padding: 30px;
+  background-color: #423d3d;
+}
+
+nav {
+  margin-bottom: 3rem;
+}
+
+ul {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  gap: 2rem;
+}
+
+li {
+  gap: 10px;
+  border: solid #e73639 1px;
+  padding: 5px 10px 5px 10px;
+  color: black;
+  font-size: 20px;
+  width: 450px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  align-content: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+li:hover {
+  background-color: #e73639;
+  transform: scale(1.025, 1.025);
+}
+
+.active {
+  background-color: #e73639;
+  transform: scale(1.1, 1.1);
+  color: white;
+}
+
+.logo {
+  object-fit: fill;
+}
+
+.square {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.upload {
+  color:#e73639 ;
+  text-decoration:underline;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 30px;
+  cursor: pointer;
+}

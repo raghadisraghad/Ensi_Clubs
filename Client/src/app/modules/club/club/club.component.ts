@@ -18,6 +18,7 @@ currentClub:Club ={
   _id: '',
   name: '',
   description: '',
+  approved:false,
   logo: '',
   slogan: '',
   rate: 0,
