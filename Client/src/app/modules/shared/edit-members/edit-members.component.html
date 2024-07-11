@@ -2,39 +2,33 @@
     <div class="column gap-1 left align-center">
       <!--Name-->
       <div class="row gap-1">
-        <span class="price-label">Title</span>
-        <input type="text" [(ngModel)]="member" />
+        <span class="price-label">Firstname </span>
+        <input type="text" [(ngModel)]="member.user.firstName" />
       </div>
   
       <!--Description-->
       <div class="row gap-1">
-        <span class="price-label">Description:</span>
-        <input type="text" [(ngModel)]="member" />
+        <span class="price-label">Lastname:</span>
+        <input type="text" [(ngModel)]="member.user.lastName" />
       </div>
   
       <!--Location-->
       <div class="row gap-1">
-        <span class="price-label">Location:</span>
+        <span class="price-label">Email:</span>
+        <input type="text" [(ngModel)]="member.user.email" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Role</span>
+        <input type="text" [(ngModel)]="member.role" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">password:</span>
         <input type="text" [(ngModel)]="member" />
       </div>
 
-      <div class="row gap-1">
-        <span class="price-label">Date:</span>
-        <input type="date" [(ngModel)]="member" />
-      </div>
-
-      <div class="row gap-1">
-        <span class="price-label">Time:</span>
-        <input type="text" [(ngModel)]="member" />
-      </div>
-
-      <div class="row gap-1">
-        <span class="price-label">Ticket:</span>
-        <p>yes</p>
-        <input type="radio" value="true" [(ngModel)]="member" />
-        <p>no</p>
-        <input type="radio" value="false" [(ngModel)]="member" />
-      </div>
+      
 
       <div class="row gap-1">
         <span class="price-label">Prix:</span>
