@@ -17,13 +17,23 @@ router.post('/registerClub', async (req, res) => {
     }
 
     club.password = await bcrypt.hash(club.password, 10);
+    
+    const payload = {
+      userId: club._id,
+      name: club.name,
+      Acronym: club.abrv,
+    };
+    const token = jwt.sign(payload, secret_Key,);
+    club.token = token;
     await club.save();
+    const type = "club"
 
-    res.status(201).json({ message: "Registered Club Successfully" });
+    res.status(201).json({club,type:type});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 router.post("/register", async (req, res) => {
   try {
@@ -42,8 +52,9 @@ router.post("/register", async (req, res) => {
     const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
     user.token = token;
     await user.save();
+    const type = "user"
 
-    res.status(201).json({ user });
+    res.status(201).json({ user,type:type });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -56,7 +67,7 @@ router.post("/login", async (req, res) => {
     let entity;
 
     entity = await User.findOne({ username: login.username });
-    const type="user";
+    let type="user";
 
     if (!entity) {
       entity = await Club.findOne({ name: login.name });
@@ -85,8 +96,8 @@ router.post("/login", async (req, res) => {
     };
     const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
     entity.token = token;
-    await User.findByIdAndUpdate(entity.id, entity, type);
-    res.status(200).json({ entity });
+    await User.findByIdAndUpdate(entity.id, entity);
+    res.status(200).json({ entity,type:type });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
