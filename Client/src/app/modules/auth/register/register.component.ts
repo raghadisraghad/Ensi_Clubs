@@ -29,7 +29,7 @@ registerForm:FormGroup = this.fb.group({
 })
 
 onSubmit(){
-  this.authService.register(`${environment}/register`,this.registerForm.getRawValue()).subscribe((res)=>{
+  this.authService.register(`${environment.apiUrl}/register`,this.registerForm.getRawValue()).subscribe((res)=>{
     localStorage.setItem('token',res.user.token)
     this.authService.currentUserSignal.set(res.user)
     this.router.navigate(["/"])
