@@ -7,10 +7,8 @@ COPY . .
 RUN npm run build --configuration=production
 
 FROM nginx:latest
-WORKDIR /usr/share/nginx/html
 RUN rm -rf *
-
-#copy the built angular app from the build stage
-COPY --from=build /app/dist/angular-app/browser .
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist/client/browser /usr/share/nginx/html
 EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
