@@ -9,6 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environment/environment';
+import { User } from '../../../../types';
 
 @Component({
   selector: 'app-login',
@@ -38,8 +39,9 @@ export class LoginComponent {
       .login(`${environment.apiUrl}/login`, this.loginForm.getRawValue())
       .subscribe((res) => {
         localStorage.setItem('token', res.entity.token);
-        localStorage.setItem('type', res.type);
-        this.authService.currentUserSignal=res.entity;
+        localStorage.setItem('type', res.type);   
+        localStorage.setItem('id', res.entity._id); 
+        this.authService.currentAccSignal.set(res.entity);
         
         
         this.router.navigate(['/home']);

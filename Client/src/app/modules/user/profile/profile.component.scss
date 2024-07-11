@@ -1,7 +1,7 @@
 .wrapper {
   min-height: 75vh;
   padding: 30px;
-  background-color: #423d3d;
+  background-color: #e0d6d6;
 }
 
 nav {
@@ -45,7 +45,17 @@ li:hover {
 }
 
 .logo {
-  object-fit: fill;
+  object-fit:cover;
+  
+}
+
+.tabs{
+    width: 100%;
+}
+
+label{
+    color: #e73639;
+    
 }
 
 .square {
@@ -73,4 +83,43 @@ input[type="file"] {
 
 .gap-4 {
     gap: 4rem;
+}
+
+input{
+    border-radius: 5px;
+    height: 45px;
+    min-width: 340px;
+    padding: 20px;
+    padding-left: 40px;
+    
+}
+button{
+    border-radius: 5px;
+    height: 45px;
+    min-width: 300px;
+    justify-content: center;
+    align-content:center ;
+    background-color: white;
+    
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.icon {
+    padding: 13px;
+    min-width: 50px;
+    text-align: center;
+    color: black;
+}
+
+.input-field {
+    padding: 10px;
+    text-align: center;
 }

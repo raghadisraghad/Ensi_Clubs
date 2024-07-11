@@ -98,6 +98,13 @@ deleteComment = (url:string):Observable<Comment> => {
   return this.apiService.delete(url,{})
 }
 
+getUnaproveClub=(url:string):Observable<any>=>{
+  return this.apiService.get(url,{})
+}
 
+
+getUnaproveEvent=(url:string):Observable<any>=>{
+  return this.apiService.get(url,{})
+}
 
 }

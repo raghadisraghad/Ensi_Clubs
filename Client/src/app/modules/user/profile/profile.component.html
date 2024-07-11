@@ -2,7 +2,7 @@
 
 <div class="column full-center gap-1">
     <div class="square full-center">
-        <img src="../../../../assets/logos/ensi.png" alt="jj" class="logo">
+        <img [src]="profileImage" class="logo">
     </div>
     <label for="upload" class="upload">Change Picture </label>
     <input type="file" name="profile_pic" id="upload" accept=".png;.jpeg;.jpg" class="" (change)="changeProfile($event)">
@@ -10,28 +10,50 @@
     
         <ul class="full-center">
             <li (click)="selectTab('profile')" [class.active]="currentTab === 'profile'">Profile</li>
-            <li (click)="selectTab('pv')" [class.active]="currentTab === 'pv'">PV's</li>
-            <li (click)="selectTab('attendance')" [class.active]="currentTab === 'attendance'">Attendance</li>
+            <li (click)="selectTab('requests')" [class.active]="currentTab === 'requests'">Request</li>
+            <li (click)="selectTab('users')" [class.active]="currentTab === 'users'">Users</li>
+            <li (click)="selectTab('users')" [class.active]="currentTab === 'Clubs'">Users</li>
            
                
         </ul>
     
 </div>
 
-<div class="column full-center">
+<div class="column tabs justify-center">
     <div [ngSwitch]="currentTab">
-
+            
         <div  *ngSwitchCase="'profile'" class="full-center">
-            profile
+            <div class="row full-center"><h1>Edit Profile</h1></div>
+            
+            <form [formGroup]="ProfileForm" (ngSubmit)="onSubmit()">
+                <div class="column full-center">
+                <label for="">First Name</label> 
+                <input type="text" formControlName="firstName" (ngModel)="this.currentUser.firstName"  required/>
+                <label for="">Last Name</label>
+                <input type="text" formControlName="lastName"  value="this.currentUser.lastName" required/>
+                <label for="">Email</label>
+                <input type="text" formControlName="email"  value="this.currentUser.email" required/>
+                <label for="">Phone </label>
+                <input type="text" formControlName="phone"  value="this.currentUser.phone" required/>
+                <label for="">Password</label>
+                <input type="password" formControlName="password"  value="this.currentUser.password" required /><br><br><br>
+                <button (click)="onSubmit()"><h3>SAVE</h3></button>
+                </div>
+            </form>
+        
         </div>
         <!--------------->
-        <div *ngSwitchCase="'pv'" >
+        <div *ngSwitchCase="'requests'" >
 
         </div>
         <!--------------->
 
-        <div  *ngSwitchCase="'attendance'" >
+        <div  *ngSwitchCase="'users'" >
 
+        </div>
+
+        <div  *ngSwitchCase="'clubs'" >
+            clubs
         </div>
         <!--------------->
         

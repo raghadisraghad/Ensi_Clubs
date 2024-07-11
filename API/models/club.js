@@ -62,6 +62,7 @@ const clubSchema = new mongoose.Schema({
         price:{type:Number,required:false},
         collab: [{ type: String, required: false}],
         archived:{type:Boolean,default:false},
+        approved:{type:Boolean,default:false},
         poster:{type:String,default:false}
       }
     ],required:false

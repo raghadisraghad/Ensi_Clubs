@@ -28,10 +28,7 @@ fetchClubs() {
     .getClubs(`${environment.apiUrl}/club`)
     .subscribe({
       next: (clubs: Club[]) => {
-        this.clubs = clubs;
-        console.log(clubs);
-        
-       
+        this.clubs = clubs;       
       },
       error: (error) => {
         console.error(error);
