@@ -10,10 +10,25 @@
 color: rgb(230, 49, 49);
 }
 
+a{
+    color: black;
+    text-decoration: none;
+}
+
+
+a:hover{
+    color: rgb(230, 49, 49);
+}
+
+span{
+    color: rgb(230, 49, 49);
+    text-decoration: underline;
+}
+
 .wrapper{
    
     background-color: #E8E8E8;
-    height: 75vh;
+    min-height: 75vh;
     display: flex;
     flex-direction: column;
 }

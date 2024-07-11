@@ -6,6 +6,7 @@ import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../auth/services/auth.service';
+import { User } from '../../../../types';
 
 
 @Component({
@@ -18,9 +19,20 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HeaderComponent {
   items:MenuItem = {}
   authService = inject(AuthService)
+  currentUser = this.authService.currentUserSignal
+  token:any
+
+  getToken(){
+    return localStorage.getItem('token')
+  }
 
   logout(){
     this.authService.logout()
+    
+    
+  }
+  ngOnInit(){
+    
     
   }
 }
