@@ -5,9 +5,9 @@ const userSchema = new mongoose.Schema({
       //Infos
       firstName: {type:String,required:true},
       lastName: {type:String,required:true},
-      profile:{type:String,required:false},
-      phone:{type:String,required:false},
-      class:{type:String,required:false},
+      profile:{type:String,required:false,default:""},
+      phone:{type:String,default:""},
+      class:{type:String,defaulr:""},
       admin:{type:Boolean,default:false},
       //Logins
       username:{type:String,required:true,unique:true},

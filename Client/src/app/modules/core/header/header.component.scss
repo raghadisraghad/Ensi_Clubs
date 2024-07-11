@@ -23,3 +23,20 @@ input {
   object-fit: contain;
 }
 
+li{
+  gap: 10px ;
+  background-color: #E73639;
+  padding: 5px 10px 5px 10px;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  list-style-type: none;
+  transition: transform 0.3s ease;
+  
+}
+
+
+li:hover{
+  background-color: white;
+  transform: scale(1.025, 1.025);
+}

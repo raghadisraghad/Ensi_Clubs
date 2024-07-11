@@ -1,1 +1,69 @@
-<p>edit-members works!</p>
+<p-dialog [header]="header" [(visible)]="display" [style]="{width:'auto', }" >
+    <div class="column gap-1 left align-center">
+      <!--Name-->
+      <div class="row gap-1">
+        <span class="price-label">Title</span>
+        <input type="text" [(ngModel)]="member" />
+      </div>
+  
+      <!--Description-->
+      <div class="row gap-1">
+        <span class="price-label">Description:</span>
+        <input type="text" [(ngModel)]="member" />
+      </div>
+  
+      <!--Location-->
+      <div class="row gap-1">
+        <span class="price-label">Location:</span>
+        <input type="text" [(ngModel)]="member" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Date:</span>
+        <input type="date" [(ngModel)]="member" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Time:</span>
+        <input type="text" [(ngModel)]="member" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Ticket:</span>
+        <p>yes</p>
+        <input type="radio" value="true" [(ngModel)]="member" />
+        <p>no</p>
+        <input type="radio" value="false" [(ngModel)]="member" />
+      </div>
+
+      <div class="row gap-1">
+        <span class="price-label">Prix:</span>
+        <input type="text" [(ngModel)]="member" />
+      </div>
+  
+      
+    </div>
+    <p-footer >
+      <div class="row space-around">
+      <button
+        class="edit-button"
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        
+      ></button>
+      
+      <button
+        class="edit-button"
+        type="button"
+        pButton
+        icon="pi pi-times"
+        (click)="onCancel()"
+        
+      ></button>
+  </div>
+      
+    </p-footer>
+  </p-dialog>
+  

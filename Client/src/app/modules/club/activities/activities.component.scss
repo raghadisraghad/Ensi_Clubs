@@ -28,6 +28,7 @@
     
     .event-card{
         justify-self: center;
+        width: 640px;
         justify-content: center;
         padding: 20px 20px 20px 20px;
         background-color: rgb(255, 255, 255);
@@ -49,4 +50,12 @@
     background-color: transparent;
     border-color: transparent;
     color: var(--red)
+}
+
+.gap-4{
+    gap: 4rem;
+}
+
+.justify-left { 
+    align-items: left;
 }

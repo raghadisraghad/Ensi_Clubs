@@ -4,6 +4,14 @@
    
 }
 
+.add-button {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: rgb(66, 67, 67);
+}
+
 
 .grid{
     display: grid;
@@ -37,3 +45,8 @@
     }
     
     
+.edit-button { 
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--red)
+}
