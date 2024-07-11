@@ -156,4 +156,34 @@ router.delete("/club/rate/:idUser", async (req, res) => {
 });
 
 
+// Logo uplaod //
+router.put("/club/logo", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const update = req.body;
+    const club = await Club.findByIdAndUpdate(id, update, { new: true });
+    res.status(200).json({ message: "Club Updated successfuly", club });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
+
+//PV upload
+router.put("/club/pv", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const update = req.body;
+    const club = await Club.findByIdAndUpdate(id, update, { new: true });
+    res.status(200).json({ message: "Club Updated successfuly", club });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
+
+
+
 module.exports = router;

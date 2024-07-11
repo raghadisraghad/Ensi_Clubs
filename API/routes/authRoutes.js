@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const secret_Key = process.env.SECRET_KEY;
 
-/*router.post('/registerClub', async (req, res) => {
+router.post('/registerClub', async (req, res) => {
   try {
     const club = new Club(req.body);
     const existingClub = await Club.findOne({ name: club.name });
@@ -23,7 +23,7 @@ const secret_Key = process.env.SECRET_KEY;
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}); */
+});
 
 router.post("/register", async (req, res) => {
   try {
@@ -56,9 +56,11 @@ router.post("/login", async (req, res) => {
     let entity;
 
     entity = await User.findOne({ username: login.username });
+    const type="user";
 
     if (!entity) {
       entity = await Club.findOne({ name: login.name });
+      type="club";
       if (!entity) {
         return res
           .status(400)
@@ -83,7 +85,7 @@ router.post("/login", async (req, res) => {
     };
     const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
     entity.token = token;
-    await User.findByIdAndUpdate(entity.id, entity);
+    await User.findByIdAndUpdate(entity.id, entity, type);
     res.status(200).json({ entity });
   } catch (error) {
     console.error(error);

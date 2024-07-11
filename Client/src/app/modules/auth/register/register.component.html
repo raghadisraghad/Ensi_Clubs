@@ -10,22 +10,23 @@
         <div class="input-icons">
           <i class="fa fa-user icon"></i>
           <input type="text" formControlName="firstName" placeholder="FIRSTNAME" />
+          <div *ngIf="registerForm.get('firstName')!.invalid && registerForm.get('firstName')?.touched">
+            <small class="error">First name is required.</small></div>
           
         </div>
-       
-                
-            
-            
-          
 
         <div class="input-icons">
           <i class="fa fa-book icon"></i>
-          <input type="text" formControlName="class" placeholder="CLASS" />
+          <input type="text" formControlName="class" placeholder="CLASS" required />
+          <div *ngIf="registerForm.get('class')!.invalid && registerForm.get('class')?.touched">
+            <small class="error">Class is required.</small></div>
         </div>
 
         <div class="input-icons">
           <i class="fa fa-at icon"></i>
-          <input type="text" formControlName="username" placeholder="USERNAME" />
+          <input type="text" formControlName="username" placeholder="USERNAME" required />
+          <div *ngIf="registerForm.get('username')!.invalid && registerForm.get('username')?.touched">
+            <small class="error">Username is required.</small></div>
         </div>
 
       </div>
@@ -33,17 +34,23 @@
       <div class="column gap-col">
         <div class="input-icons">
           <i class="fa fa-user icon"></i>
-          <input type="text" formControlName="lastName" placeholder="LASTNAME" />
+          <input type="text" formControlName="lastName" placeholder="LASTNAME" required />
+          <div *ngIf="registerForm.get('lastName')!.invalid && registerForm.get('lastName')?.touched">
+            <small class="error">Last name is required.</small></div>
         </div>
 
         <div class="input-icons">
           <i class="fa fa-envelope icon"></i>
-          <input type="email" formControlName="email" placeholder="EMAIL" />
+          <input type="email" formControlName="email" placeholder="EMAIL"  required/>
+          <div *ngIf="registerForm.get('email')!.invalid && registerForm.get('email')?.touched">
+            <small class="error">Email is required.</small></div>
         </div>
 
         <div class="input-icons">
           <i class="fa fa-unlock-alt icon"></i>
-          <input type="password" formControlName="password" placeholder="PASSWORD" />
+          <input type="password" formControlName="password" placeholder="PASSWORD" required />
+          <div *ngIf="registerForm.get('password')!.invalid && registerForm.get('password')?.touched">
+            <small class="error">Password is required.</small></div>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 export interface User {
   _id: string;
@@ -40,7 +41,7 @@ export interface Event {
 
 export interface Member {
   _id?: string;
-  user: User | string;
+  user: User;
   role: string;
   absence: number;
 }
@@ -49,6 +50,7 @@ export interface Club {
   _id: string;
   name: string;
   description: string;
+  approved:Boolean;
   logo: string;
   slogan: string;
   rate: number;

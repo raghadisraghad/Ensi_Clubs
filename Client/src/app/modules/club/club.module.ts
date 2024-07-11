@@ -10,11 +10,12 @@ import { MembersComponent } from './members/members.component';
 import { HistoryComponent } from './history/history.component';
 import { ApiService } from '../shared/services/api.service';
 import { FormsModule } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [ClubComponent],
   imports: [ClubRoutingModule,FormsModule, CommonModule,TabViewModule,ActivitiesComponent,ContactComponent,HomeComponent,MembersComponent,HistoryComponent],
   exports:[TabViewModule,FormsModule],
-  providers:[ApiService],
+  providers:[ApiService,ConfirmationService],
 })
 export class ClubModule {}

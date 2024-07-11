@@ -1,0 +1,55 @@
+.wrapper {
+  width: 100%;
+  min-height: 75vh;
+  padding: 30px 30px 30px 30px;
+  background-color: var(--bg-color);
+}
+
+.grid {
+  display: grid;
+  column-gap: 50px;
+  row-gap: 70px;
+  padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  padding: 20px;
+}
+
+.logo {
+  object-fit: cover;
+}
+
+.square {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 96px;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+p {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.add-button {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: rgb(66, 67, 67);
+}
