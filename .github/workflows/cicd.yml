@@ -13,18 +13,26 @@ jobs:
         uses: actions/checkout@v4
       
       # Node.js application build steps
+      - name: Log environment variables
+        run: env
       - name: Create .env file for Node.js
         run: echo "MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}" >> .env
+      - name: Show .env file
+        run: cat .env
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}       
       - name: Build Node.js docker image
         run: docker build -t raghadisraghad/nodejs-app ./API  
+      - name: Show Node.js Docker image
+        run: docker images | grep nodejs-app
       - name: Publish Node.js image to docker hub
         run: docker push raghadisraghad/nodejs-app:latest
 
       # Angular application build steps
       - name: Build Angular docker image
         run: docker build -t raghadisraghad/angular-app ./Client
+      - name: Show Angular Docker image
+        run: docker images | grep angular-app
       - name: Publish Angular image to docker hub
         run: docker push raghadisraghad/angular-app:latest
 
@@ -32,18 +40,26 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+      - name: Log environment variables
+        run: env
       # Node.js application deploy steps
       - name: Pull Node.js image from docker hub
         run: docker pull raghadisraghad/nodejs-app:latest
+      - name: Show Node.js Docker image
+        run: docker images | grep nodejs-app
       - name: Delete old Node.js container
-        run: docker rm -f nodejs-app-container  
+        run: |
+          docker rm -f nodejs-app-container || echo "Node.js container not found"
       - name: Run Node.js docker container
         run: docker run -d -p 4000:4000 --name nodejs-app-container raghadisraghad/nodejs-app
 
       # Angular application deploy steps
       - name: Pull Angular image from docker hub
         run: docker pull raghadisraghad/angular-app:latest
+      - name: Show Angular Docker image
+        run: docker images | grep angular-app
       - name: Delete old Angular container
-        run: docker rm -f angular-app-container  
+        run: |
+          docker rm -f angular-app-container || echo "Angular container not found"
       - name: Run Angular docker container
         run: docker run -d -p 4200:80 --name angular-app-container raghadisraghad/angular-app
