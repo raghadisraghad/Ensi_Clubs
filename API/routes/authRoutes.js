@@ -67,10 +67,10 @@ router.post("/login", async (req, res) => {
     let entity;
 
     entity = await User.findOne({ username: login.username });
-    let type="user";
+    const type="user";
 
     if (!entity) {
-      entity = await Club.findOne({ name: login.name });
+      entity = await Club.findOne({ name: login.username });
       type="club";
       if (!entity) {
         return res
@@ -94,10 +94,10 @@ router.post("/login", async (req, res) => {
       firstName: entity.firstName,
       lastName: entity.lastName,
     };
-    const token = jwt.sign(payload, secret_Key, { expiresIn: "1h" });
-    entity.token = token;
-    await User.findByIdAndUpdate(entity.id, entity);
-    res.status(200).json({ entity,type:type });
+    const lastActivity = Math.floor(Date.now() / 1000);
+    const expiration = lastActivity + (7 * 24 * 60 * 60);
+    const token = jwt.sign({ userId: entity._id, lastActivity }, secret_Key, { expiresIn: expiration });
+    res.status(200).json({ token, userId: entity._id, type , entity});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

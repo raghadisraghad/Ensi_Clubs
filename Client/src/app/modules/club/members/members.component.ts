@@ -107,7 +107,7 @@ export class MembersComponent {
 
   deleteMember(id: string) {
     this.clubService
-      .deleteEvent(`http://localhost:3000/event/${this.club._id}/${id}`)
+      .deleteEvent(`${environment.apiUrl}/${this.club._id}/${id}`)
       .subscribe({
         next: (data) => {
           this.refreshClub();

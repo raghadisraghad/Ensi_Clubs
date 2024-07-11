@@ -38,9 +38,9 @@ export class LoginComponent {
     this.authService
       .login(`${environment.apiUrl}/login`, this.loginForm.getRawValue())
       .subscribe((res) => {
-        localStorage.setItem('token', res.entity.token);
+        localStorage.setItem('token', res.token);
         localStorage.setItem('type', res.type);   
-        localStorage.setItem('id', res.entity._id); 
+        localStorage.setItem('id', res.userId); 
         this.authService.currentAccSignal.set(res.entity);
         
         
