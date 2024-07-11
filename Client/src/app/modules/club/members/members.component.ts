@@ -74,7 +74,7 @@ export class MembersComponent {
     console.log(member);
 
     this.clubService
-      .addMember(`${environment}/event/${this.club._id}`, member)
+      .addMember(`${environment.apiUrl}/event/${this.club._id}`, member)
       .subscribe({
         next: (data) => {
           this.refreshClub();
@@ -91,7 +91,7 @@ export class MembersComponent {
 
     this.clubService
       .editMember(
-        `http://localhost:3000/event/${this.club._id}/${member._id}`,
+        `${environment.apiUrl}/event/${this.club._id}/${member._id}`,
         member
       )
       .subscribe({
