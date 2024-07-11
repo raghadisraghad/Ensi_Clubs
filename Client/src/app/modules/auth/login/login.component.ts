@@ -34,7 +34,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService
-      .login(`${environment}/login`, this.loginForm.getRawValue())
+      .login(`${environment.apiUrl}/login`, this.loginForm.getRawValue())
       .subscribe((res) => {      
         localStorage.setItem('token', res.entity.token);
         this.authService.currentUserSignal.set(res.entity);

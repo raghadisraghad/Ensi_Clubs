@@ -25,7 +25,7 @@ router=inject(Router)
 
 fetchClubs() {
   this.clubApi
-    .getClubs(`${environment}/club`)
+    .getClubs(`${environment.apiUrl}/club`)
     .subscribe({
       next: (clubs: Club[]) => {
         this.clubs = clubs;

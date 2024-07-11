@@ -153,7 +153,7 @@ extractDate(dateString: any): any {
 
 refreshClub(){
     this.clubService
-      .getClubById(`${environment}/club/${this.club._id}`)
+      .getClubById(`${environment.apiUrl}/club/${this.club._id}`)
       .subscribe({
         next: (club: Club) => {
           this.club = club;
