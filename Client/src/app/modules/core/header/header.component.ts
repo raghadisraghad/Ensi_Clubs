@@ -20,6 +20,7 @@ export class HeaderComponent {
   authService = inject(AuthService)
 
   logout(){
+    this.authService.logout()
     
   }
 }

@@ -5,6 +5,7 @@ import { Observable,map,of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { User } from '../../../../types';
 import { Router } from '@angular/router';
+import {environment} from '../../../../environment/environment'
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -18,7 +19,7 @@ authService = inject(AuthService)
 router = inject(Router)
 
 registerForm:FormGroup = this.fb.group({
-  firstName:this.fb.control(''),
+  firstName:this.fb.control('',{validators:[Validators.required,]}),
   lastName:this.fb.control('',{validators:[Validators.required,]}),
   class:this.fb.control('',{validators:[Validators.required,]}),
   email:this.fb.control('',{validators:[Validators.required,Validators.email]}),
@@ -28,7 +29,7 @@ registerForm:FormGroup = this.fb.group({
 })
 
 onSubmit(){
-  this.authService.register("http://localhost:3000/register",this.registerForm.getRawValue()).subscribe((res)=>{
+  this.authService.register(`${environment}/register`,this.registerForm.getRawValue()).subscribe((res)=>{
     localStorage.setItem('token',res.user.token)
     this.authService.currentUserSignal.set(res.user)
     this.router.navigate(["/"])
