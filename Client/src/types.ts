@@ -35,6 +35,7 @@ export interface Event {
   ticket: boolean;
   collab: string[];
   archived: Boolean;
+  approved:Boolean;
   price: number;
   poster: string;
 }

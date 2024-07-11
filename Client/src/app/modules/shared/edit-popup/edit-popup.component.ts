@@ -26,6 +26,7 @@ export class EditPopupComponent {
   ticket: false,
   collab: [],
   archived: false,
+  approved:false,
   price: 0,
   poster: ''
 };

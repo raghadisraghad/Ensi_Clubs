@@ -29,20 +29,8 @@ export class ProfileComponent {
   requestClubs : any
   fb = inject(FormBuilder);
   currentTab = 'profile';
-  currentUser:User={
-    _id: '',
-    firstName: '',
-    lastName: '',
-    profile: '',
-    phone: '',
-    class: '',
-    admin: false,
-    username: '',
-    email: '',
-    password: '',
-    token: ''
-  };
-
+  currentUser:any
+  errorMessage = '';
   changeProfile(event: any) {
     const target = event.target.files[0];
 
@@ -58,7 +46,7 @@ export class ProfileComponent {
       )
       .subscribe({
         next: (res) => {
-         this.currentUser=(res);
+         
         },
 
         error: (error) => {
@@ -70,6 +58,18 @@ export class ProfileComponent {
   get profileImage(): string {
     const profile = this.authService.currentAccSignal()?.profile;
     return profile ?? '../../../../assets/logos/ensi.png';
+  }
+
+  getById(id: any): void {
+    this.userService.getUserById(id).subscribe(
+      (data) => {
+        this.currentUser = data;
+      },
+      (error) => {
+        console.error(`Errfetching usor er with ID ${id}:`, error);
+        this.errorMessage = 'Failed to fetch user details.';
+      }
+    );
   }
 
   selectTab(tab: string) {
@@ -101,10 +101,12 @@ export class ProfileComponent {
 
   fetchUser(){
     const id = localStorage.getItem('id');
+    console.log(id);
+    
     this.userService.getUserById(`${environment.apiUrl}/user/${id}`).subscribe({
       next: (res: any) => {
         this.currentUser = res;
-        console.log(this.currentUser);
+       
         
         
       },
@@ -114,12 +116,15 @@ export class ProfileComponent {
     });
   }
 
-   ngOnInit() {
+     ngOnInit() {
+    const id = localStorage.getItem('id')
+       this.getById(id)
+      this.fetchRequestsClubs()
+     this.fetchRequestsEvents()
+     console.log(this.currentUser);
+     
+   
     
-    this.fetchUser()
-    this.fetchRequestsClubs()
-    this.fetchRequestsEvents()
-    console.log(this.currentUser);
     
     
   }

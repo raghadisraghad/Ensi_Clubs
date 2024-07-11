@@ -174,7 +174,7 @@ router.put("/club/logo", async (req, res) => {
 });
 
 //PV upload
-router.put("/club/pv", async (req, res) => {
+/*router.put("/club/pv", async (req, res) => {
   try {
     const { id } = req.params;
     const update = req.body;
@@ -185,7 +185,7 @@ router.put("/club/pv", async (req, res) => {
       message: err.message,
     });
   }
-});
+});*/
 
 router.get("/unaproved", async (req,res) => {
   try {

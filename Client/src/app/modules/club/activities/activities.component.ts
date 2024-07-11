@@ -50,6 +50,7 @@ selectedEvent: Event = {
   ticket: false,
   collab: [],
   archived: false,
+  approved:false,
   price: 0,
   poster: ''
 };
@@ -84,10 +85,10 @@ addEvent(event: Event) {
   console.log(event);
   
   this.clubService
-    .addEvent(`http://localhost:3000/event/${this.club._id}`, event)
+    .addEvent(`${environment.apiUrl}/${this.club._id}`, event)
     .subscribe({
-      next: (data) => {
-        this.refreshClub() 
+      next: async (data) => {
+        await this.refreshClub() 
         
       },
 
@@ -101,10 +102,10 @@ editEvent(event: Event) {
   console.log(event);
   
   this.clubService
-    .editEvent(`http://localhost:3000/event/${this.club._id}/${event._id}`, event)
+    .editEvent(`${environment.apiUrl}/event/${this.club._id}/${event._id}`, event)
     .subscribe({
-      next: (data) => {
-        this.refreshClub()
+      next: async (data) => {
+        await this.refreshClub()
         
       },
 
@@ -116,10 +117,10 @@ editEvent(event: Event) {
 
 deleteEvent(id: string) {
   this.clubService
-    .deleteEvent(`http://localhost:3000/event/${this.club._id}/${id}`)
+    .deleteEvent(`${environment.apiUrl}/event/${this.club._id}/${id}`)
     .subscribe({
-      next: (data) => {
-        this.refreshClub()
+      next: async (data) => {
+        await this.refreshClub()
       },
 
       error: (error) => {
@@ -146,7 +147,7 @@ ngOnInit(){
 
 }
 
-extractDate(dateString: any): any {
+extractDate(dateString:any ) {
   return dateString.split('T')[0];
 }
 
