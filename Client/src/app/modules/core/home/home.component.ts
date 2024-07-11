@@ -28,6 +28,8 @@ fetchClubs() {
     .subscribe({
       next: (clubs: Club[]) => {
         this.clubs = clubs;
+        console.log(clubs);
+        
        
       },
       error: (error) => {

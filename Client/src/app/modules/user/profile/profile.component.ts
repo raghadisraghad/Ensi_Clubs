@@ -3,6 +3,7 @@ import { Component, inject, NgModule } from '@angular/core';
 import { User } from '../../../../types';
 import { NgModel } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ import { UserService } from '../services/user.service';
 })
 export class ProfileComponent {
 userService = inject(UserService)
-currentUser!:User
+authService = inject(AuthService)
+currentUser = this.authService.currentUserSignal
 currentTab = "profile"
 
 
@@ -28,7 +30,7 @@ changeProfile(event:any) {
   const id="6689cbd939015cc484403f6d"
   console.log(target);
   
-  this.userService.updateProfile(`http://localhost:3000/user/upload`,formData)
+  this.userService.updateProfile(`http://localhost:3000/user/${this.currentUser}/upload`,formData)
   .subscribe({
     next: (res) => {
       console.log(res);

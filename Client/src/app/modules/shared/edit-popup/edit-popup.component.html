@@ -3,37 +3,37 @@
       <!--Name-->
       <div class="row gap-1">
         <span class="price-label">Title</span>
-        <input type="text" [(ngModel)]="event.title" />
+        <input type="text" [(ngModel)]="event.title" required />
       </div>
   
       <!--Description-->
       <div class="row gap-1">
         <span class="price-label">Description:</span>
-        <input type="text" [(ngModel)]="event.description" />
+        <input type="text" [(ngModel)]="event.description" required />
       </div>
   
       <!--Location-->
       <div class="row gap-1">
         <span class="price-label">Location:</span>
-        <input type="text" [(ngModel)]="event.location" />
+        <input type="text" [(ngModel)]="event.location" required />
       </div>
 
       <div class="row gap-1">
         <span class="price-label">Date:</span>
-        <input type="date" [(ngModel)]="event.date" />
+        <input type="date" [(ngModel)]="event.date" required />
       </div>
 
       <div class="row gap-1">
         <span class="price-label">Time:</span>
-        <input type="text" [(ngModel)]="event.time" />
+        <input type="text" [(ngModel)]="event.time"  required/>
       </div>
 
       <div class="row gap-1">
         <span class="price-label">Ticket:</span>
         <p>yes</p>
-        <input type="radio" value="true" [(ngModel)]="event.ticket" />
+        <input type="radio" value="true" [(ngModel)]="event.ticket" required />
         <p>no</p>
-        <input type="radio" value="false" [(ngModel)]="event.ticket" />
+        <input type="radio" value="false" [(ngModel)]="event.ticket" required />
       </div>
 
       <div class="row gap-1">
@@ -47,7 +47,7 @@
       <div class="row space-around">
       <button
         class="edit-button"
-        type="button"
+        type="submit"
         pButton
         icon="pi pi-check"
         (click)="onConfirm()"

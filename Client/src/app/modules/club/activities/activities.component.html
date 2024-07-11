@@ -1,28 +1,31 @@
 <div class="wrapper">
   <div class="grid full-center">
     <div
-      class="row gap-4 align-center event-card"
+      class="row gap-4 full-center event-card"
       *ngFor="let event of events"
       (edit)="toggleEditPopup(event)"
       (delete)="toggleDeletePopup(event)"
-      >
-      <div class="column">
-        <img [src]="event.poster" alt="" />
+    >
+      @if(!event.archived){
+      <div class="column justify-left gap-4">
+        <img src="../../../../../assets/logos/ensi.png" alt="">
+        
       </div>
       <div class="column full-center event-card-text">
         <h2>
-          {{ event.title}}
+          {{ event.title }}
         </h2>
         <p class="center-text">
           {{ event.description }}
         </p>
         <p>
           <br /><br />
-          Date :{{ event.date }} <br/>
-          Time :{{event.time}} <br>
-          ticket :{{ event.ticket === false ? "N/A" : "Required" }}<br />Price :{{ event.price == 0 ? "FREE" : event.price }}
+          Date :{{ event.date }} <br />
+          Time :{{ event.time }} <br />
+          ticket :{{ event.ticket === false ? "N/A" : "Required" }}<br />Price
+          :{{ event.price == 0 ? "FREE" : event.price }}
         </p>
-        
+
         <div class="row gap-05">
           <button
             class="edit-button"
@@ -41,18 +44,18 @@
             #deleteButton
           ></button>
         </div>
-      </div>
+      </div>}
     </div>
+    
     <div class="row full-center">
-    <button
-      class="add-button "
-      type="button"
-      pButton
-      icon="pi pi-plus"
-      (click)="toggleAddPopup()"
-    ></button>
-  </div>
-  
+      <button
+        class="add-button"
+        type="button"
+        pButton
+        icon="pi pi-plus"
+        (click)="toggleAddPopup()"
+      ></button>
+    </div>
   </div>
 
   <!--add popup-->
