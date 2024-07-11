@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl: ''
+    apiUrl: '16.171.200.67:4000'
 }
