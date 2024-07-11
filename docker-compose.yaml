@@ -19,7 +19,7 @@ services:
     container_name: api_club
     restart: always
     ports:
-      - "3000:3000"
+      - "4000:4000"
     depends_on:
       - mongo_club
     command: node app.js
@@ -33,7 +33,7 @@ services:
     container_name: client_club
     restart: always
     ports:
-      - "80:80"
+      - "4200:80"
     expose:
       - 80
     depends_on:
