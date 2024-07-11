@@ -2,7 +2,7 @@
   <img src="../../../assets/logos/ensi.png" class="logo" /><img />
   <div class="search row full-center ">
     <span><input type="text" placeholder="Search" /></span>
-    <p-button icon="pi pi-search" [rounded]="true" [text]="true" severity="secondary"  />
+    <p-button icon="pi pi-search" [rounded]="true" [text]="true" severity="secondary" (onClick)="logout()"  />
   </div>
   
   <p-button class="button" icon="pi pi-cog" [rounded]="true" [text]="true" severity="secondary" routerLink="/profile"/>

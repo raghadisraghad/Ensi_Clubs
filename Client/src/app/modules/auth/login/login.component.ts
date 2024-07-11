@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService
-      .login('http://localhost:3000/login', this.loginForm.getRawValue())
+      .login(`${environment}/login`, this.loginForm.getRawValue())
       .subscribe((res) => {      
         localStorage.setItem('token', res.entity.token);
         this.authService.currentUserSignal.set(res.entity);

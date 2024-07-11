@@ -8,6 +8,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { NgModel } from '@angular/forms';
+import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-activities',
@@ -152,7 +153,7 @@ extractDate(dateString: any): any {
 
 refreshClub(){
     this.clubService
-      .getClubById(`http://localhost:3000/club/${this.club._id}`)
+      .getClubById(`${environment}/club/${this.club._id}`)
       .subscribe({
         next: (club: Club) => {
           this.club = club;

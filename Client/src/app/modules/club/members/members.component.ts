@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { EditMembersComponent } from '../../shared/edit-members/edit-members.component';
+import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-members',
@@ -73,7 +74,7 @@ export class MembersComponent {
     console.log(member);
 
     this.clubService
-      .addMember(`http://localhost:3000/event/${this.club._id}`, member)
+      .addMember(`${environment}/event/${this.club._id}`, member)
       .subscribe({
         next: (data) => {
           this.refreshClub();

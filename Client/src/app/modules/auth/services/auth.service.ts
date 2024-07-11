@@ -20,7 +20,9 @@ export class AuthService {
     return this.apiService.post(url,body,{})
   }
 
-  logout = 0
+  logout():void {
+    localStorage.setItem('token','')
+  }
 
   
 

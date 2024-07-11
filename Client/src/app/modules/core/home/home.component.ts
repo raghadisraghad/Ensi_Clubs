@@ -5,6 +5,7 @@ import { Clubs,Club } from '../../../../types';
 import { SharedService } from '../../shared/services/shared.service';
 import { Router } from '@angular/router';
 import { state } from '@angular/animations';
+import { environment } from '../../../../environment/environment';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ router=inject(Router)
 
 fetchClubs() {
   this.clubApi
-    .getClubs('http://localhost:3000/club')
+    .getClubs(`${environment}/club`)
     .subscribe({
       next: (clubs: Club[]) => {
         this.clubs = clubs;
