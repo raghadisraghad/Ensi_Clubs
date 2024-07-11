@@ -1,0 +1,49 @@
+name: Deploy Applications
+
+on:
+  push: 
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      
+      # Node.js application build steps
+      - name: Create .env file for Node.js
+        run: echo "MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}" >> .env
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}       
+      - name: Build Node.js docker image
+        run: docker build -t raghadisraghad/nodejs-app ./API  
+      - name: Publish Node.js image to docker hub
+        run: docker push raghadisraghad/nodejs-app:latest
+
+      # Angular application build steps
+      - name: Build Angular docker image
+        run: docker build -t raghadisraghad/angular-app ./Client
+      - name: Publish Angular image to docker hub
+        run: docker push raghadisraghad/angular-app:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      # Node.js application deploy steps
+      - name: Pull Node.js image from docker hub
+        run: docker pull raghadisraghad/nodejs-app:latest
+      - name: Delete old Node.js container
+        run: docker rm -f nodejs-app-container  
+      - name: Run Node.js docker container
+        run: docker run -d -p 4000:4000 --name nodejs-app-container raghadisraghad/nodejs-app
+
+      # Angular application deploy steps
+      - name: Pull Angular image from docker hub
+        run: docker pull raghadisraghad/angular-app:latest
+      - name: Delete old Angular container
+        run: docker rm -f angular-app-container  
+      - name: Run Angular docker container
+        run: docker run -d -p 4200:80 --name angular-app-container raghadisraghad/angular-app
