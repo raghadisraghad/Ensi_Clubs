@@ -6,6 +6,7 @@
     <p-button icon="pi pi-search" [rounded]="true" [text]="true" severity="secondary" (onClick)="logout()"  />
   </div>
   
-  <p-button class="button" icon="pi pi-cog" [rounded]="true" [text]="true" severity="secondary" routerLink="/profile"/>
+  <h2 class="all" (click)="allRedirect()">All</h2>
+  <p-button class="button" icon="pi pi-cog" [rounded]="true" [text]="true" severity="secondary" (onClick)="profileRedirect()"/>
   <li (click)="logout()">Logout</li>}
 </div>

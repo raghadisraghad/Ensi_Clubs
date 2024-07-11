@@ -5,7 +5,7 @@ const Club = require("../models/club");
 //Get All clubs //
 router.get("/club", async (req, res) => {
   try {
-    const clubs = await Club.find().populate()
+    const clubs = await Club.find().populate();
     res.status(200).json(clubs);
   } catch (err) {
     res.status(500).json({
@@ -18,7 +18,7 @@ router.get("/club", async (req, res) => {
 router.get("/club/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const club = await Club.findById(id).populate()
+    const club = await Club.findById(id).populate();
     if (!club) {
       return res.status(404).send({ error: "Club doesn't exist !!!" });
     }
@@ -47,7 +47,7 @@ router.post("/club", async (req, res) => {
 router.post("/club/contact/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const comment = req.body
+    const comment = req.body;
     const club = await Club.findById(id);
     club.comments.push(comment);
     await club.save();
@@ -68,16 +68,19 @@ router.post("/club/rate/:idClub", async (req, res) => {
     if (!club) {
       return res.status(404).json({ message: "Club Not Found !!!" });
     }
-    const existingRate = club.rate.find(r => r.user.toString() === user);
+    const existingRate = club.rate.find((r) => r.user.toString() === user);
     if (existingRate) {
       existingRate.rated = rate;
     } else {
       club.rate.push({ user: user, rated: rate });
     }
     const totalRates = club.rate.reduce((sum, r) => sum + r.rated, 0);
-    club.averageRate=totalRates / club.rate.length;
+    club.averageRate = totalRates / club.rate.length;
     await club.save();
-    const updatedClub = await Club.findById(idClub).populate('rate.user', 'name');
+    const updatedClub = await Club.findById(idClub).populate(
+      "rate.user",
+      "name"
+    );
     res.json({ club: updatedClub });
   } catch (err) {
     console.error(err);
@@ -104,10 +107,10 @@ router.delete("/club/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const club = await Club.findByIdAndDelete(id);
-    if(!club){
-      return res.status(404).json({message:"Club Not Found !!!"})
+    if (!club) {
+      return res.status(404).json({ message: "Club Not Found !!!" });
     }
-    res.status(200).json({ message: "Club Deleted successfuly",club });
+    res.status(200).json({ message: "Club Deleted successfuly", club });
   } catch (err) {
     res.status(500).json({
       message: err.message,
@@ -141,10 +144,11 @@ router.delete("/club/rate/:idUser", async (req, res) => {
     }
     for (const club of clubs) {
       const initialRateCount = club.rate.length;
-      club.rate = club.rate.filter(r => !r.user.equals(idUser));
+      club.rate = club.rate.filter((r) => !r.user.equals(idUser));
       if (club.rate.length !== initialRateCount) {
         const totalRates = club.rate.reduce((sum, r) => sum + r.rated, 0);
-        club.averageRate = club.rate.length > 0 ? totalRates / club.rate.length : 0;
+        club.averageRate =
+          club.rate.length > 0 ? totalRates / club.rate.length : 0;
         await club.save();
       }
     }
@@ -154,7 +158,6 @@ router.delete("/club/rate/:idUser", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
 
 // Logo uplaod //
 router.put("/club/logo", async (req, res) => {
@@ -184,6 +187,29 @@ router.put("/club/pv", async (req, res) => {
   }
 });
 
+router.get("/unaproved", async (req,res) => {
+  try {
+    const clubs = await Club.find({ approved: false });
+    res.status(200).json({ clubs });
+  } catch (error) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+});
 
+router.get("/event/unaproved", async (req,res) => {
+  try {
+    const clubs = await Club.find({
+      events: { $elemMatch: { approved: false } },
+    });
+    console.log(clubs);
+      res.status(200).json({ clubs });
+  } catch (error) {
+      res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 
 module.exports = router;

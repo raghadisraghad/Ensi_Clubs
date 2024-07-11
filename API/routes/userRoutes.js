@@ -113,13 +113,13 @@ router.delete("/user/:id", async (req, res) => {
 
 //Profile pic
 router.post(
-  "/user/upload",
+  "/user/:id/upload",
   upload.single("profile_pic"),
   async (req, res) => {
     try {
-      const {id} = "668ec10cf3c50de004b830b5"
+      const {id} = req.params
       let update = await User.findById(id);
-      update.profile = `mamak`
+      update.profile = `http://localhost:3000/uploads/${req.file.filename}`
   
       update = await User.findByIdAndUpdate(id,update,{ new: true })    
       

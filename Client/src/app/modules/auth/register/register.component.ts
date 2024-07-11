@@ -54,7 +54,9 @@ export class RegisterComponent {
       )
       .subscribe((res) => {
         localStorage.setItem('token', res.user.token);
+        localStorage.setItem('id', res.user._id);
         localStorage.setItem('type', res.type);
+        this.authService.currentAccSignal.set(res.user);
         this.router.navigate(['/home']);
       });
   }
@@ -65,12 +67,11 @@ export class RegisterComponent {
         `${environment.apiUrl}/registerClub`,
         this.ClubRegisterForm.getRawValue()
       )
-      .subscribe((res) => {
-        console.log(res);
-        
+      .subscribe((res) => {    
         localStorage.setItem('token', res.club.token);
         localStorage.setItem('type', res.type);
-
+        localStorage.setItem('token', res.club.token);
+        this.authService.currentAccSignal.set(res.club);
         this.router.navigate(['/home']);
       });
   }

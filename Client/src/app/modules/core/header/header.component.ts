@@ -7,6 +7,7 @@ import { ToastModule } from 'primeng/toast';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../../../types';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,13 +18,20 @@ import { User } from '../../../../types';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+
   items:MenuItem = {}
   authService = inject(AuthService)
-  currentUser = this.authService.currentUserSignal
-  token:any
+  router =inject(Router)
+  currentUser = this.authService.currentAccSignal
+  
 
   getToken(){
     return localStorage.getItem('token')
+  }
+
+  getType(){
+    return localStorage.getItem('type')
   }
 
   logout(){
@@ -33,6 +41,22 @@ export class HeaderComponent {
   }
   ngOnInit(){
     
-    
   }
-}
+
+  profileRedirect() {
+
+    if( this.getType()=="user"){
+      this.router.navigate(["/profile/user"])
+    }
+    else
+    if( this.getType()=="club")
+    this.router.navigate(["/profile/club"])
+    }
+    
+    allRedirect() {
+      this.router.navigate(["/home"])
+      }
+  }
+
+
+   
