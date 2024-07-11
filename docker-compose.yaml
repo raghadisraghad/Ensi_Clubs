@@ -6,7 +6,7 @@ services:
     container_name: mongo_club
     restart: always
     ports:
-      - "28017:27017"
+      - "27017:27017"
     volumes:
       - mongo_club_data:/data/db
     networks:
