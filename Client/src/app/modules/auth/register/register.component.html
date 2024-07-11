@@ -1,10 +1,14 @@
-<div class="wrapper justify-center">
-    <div class="row full-center mt-row ">
-      <img src="../../../assets/logos/ensi.png" class="logo">  
-    </div>
+
+  <div class="row image full-center ">
+    <img src="../../../assets/logos/ensi.png" class="logo">  
+  </div>
+<div class="wrapper row full-center gap-row">
+<div class=" column full-center gap-1">
+    
+    <h2>Student Account</h2><br>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     
-    <div class="row justify-center gap-row">
+    <div class="row justify-center gap-1">
       <div class="column gap-col">
 
         <div class="input-icons">
@@ -57,6 +61,78 @@
 
     <div class="row full-center mt-row">
       <button type="submit">REGISTER</button>
+      
     </div>
   </form>
+  
+</div>
+<!--     --------------------------------    -->
+
+<div class=" column full-center gap-1">
+    
+    <h2>Club Account</h2><br>
+  <form [formGroup]="ClubRegisterForm" (ngSubmit)="onClubSubmit()">
+    
+    <div class="row justify-center gap-1">
+      <div class="column gap-col">
+
+        <div class="input-icons">
+          <i class="fa fa-user icon"></i>
+          <input type="text" formControlName="name" placeholder="NAME" />
+          <div *ngIf="ClubRegisterForm.get('name')!.invalid && ClubRegisterForm.get('name')?.touched">
+            <small class="error">Name is required.</small></div>
+          
+        </div>
+
+        <div class="input-icons">
+          <i class="fa fa-book icon"></i>
+          <input type="text" formControlName="abrv" placeholder="ACRONYM" required />
+          <div *ngIf="ClubRegisterForm.get('abrv')!.invalid && ClubRegisterForm.get('abrv')?.touched">
+            <small class="error">Acronym is required.</small></div>
+        </div>
+
+        <div class="input-icons">
+          <i class="fa fa-at icon"></i>
+          <input type="text" formControlName="email" placeholder="EMAIL" required />
+          <div *ngIf="ClubRegisterForm.get('email')!.invalid && ClubRegisterForm.get('email')?.touched">
+            <small class="error">Email is required.</small></div>
+        </div>
+
+      </div>
+
+      <div class="column gap-col">
+        <div class="input-icons">
+          <i class="fa fa-user icon"></i>
+          <input type="text" formControlName="slogan" placeholder="SLOGAN" required />
+          <div *ngIf="ClubRegisterForm.get('slogan')!.invalid && ClubRegisterForm.get('slogan')?.touched">
+            <small class="error">Slogan is required.</small></div>
+        </div>
+
+        <div class="input-icons">
+          <i class="fa fa-book icon"></i>
+          <input type="email" formControlName="description" placeholder="DESCRIPTION"  required/>
+          <div *ngIf="ClubRegisterForm.get('description')!.invalid && ClubRegisterForm.get('description')?.touched">
+            <small class="error">Description is required.</small></div>
+        </div>
+
+        <div class="input-icons">
+          <i class="fa fa-unlock-alt icon"></i>
+          <input type="password" formControlName="password" placeholder="PASSWORD" required />
+          <div *ngIf="ClubRegisterForm.get('password')!.invalid && ClubRegisterForm.get('password')?.touched">
+            <small class="error">Password is required.</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row full-center mt-row">
+      <button type="submit">REGISTER</button>
+      
+    </div>
+  </form>
+  
+</div>
+</div>
+
+<div class="row full-center link" style="background-color: #E8E8E8;">
+  <div ><a href="/" ><h2>already have an account?<span> login</span></h2></a></div><br>
 </div>
