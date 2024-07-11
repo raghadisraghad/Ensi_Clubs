@@ -8,6 +8,7 @@ const clubSchema = new mongoose.Schema({
   email: {  type: String, required: true },
   password:{type:String,required:true},
   averageRate:{type:Number,required:false, default: 0},
+  approved:{type:Boolean,default:false},
   rate: {
     type: [
       {
@@ -65,6 +66,7 @@ const clubSchema = new mongoose.Schema({
       }
     ],required:false
   },
+
  
   //comments//
   comments: [

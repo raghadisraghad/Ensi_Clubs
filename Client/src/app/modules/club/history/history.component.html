@@ -1,8 +1,9 @@
 <div class="wrapper">
   <div class="grid full-center">
-    history
-    <div class="row gap-4 align-center event-card" *ngFor="let event of events">
-      @if(event.archived == true){
+
+    <div *ngFor="let event of events">
+      @if(event.archived){
+    <div class="row  align-center event-card">
       <div class="column">
         <img src="{{ event.poster }}" alt="" />
       </div>
@@ -19,10 +20,11 @@
           Time :{{ event.time }} <br />
           ticket :{{ event.ticket === false ? "N/A" : "Required" }}<br />Price
           :{{ event.price == 0 ? "FREE" : event.price }}
-        </p>
-        <div class="row gap-05"></div>
+        </p>     
       </div>
+    </div>
         }
+        
     </div>
   </div>
 </div>

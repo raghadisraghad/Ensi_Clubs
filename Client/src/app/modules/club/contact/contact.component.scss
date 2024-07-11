@@ -1,0 +1,118 @@
+.container {
+    display: flex;
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.contact-info {
+    flex: 1;
+    padding: 40px;
+    background: #333;
+    color: #fff;
+}
+
+.contact-info h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+}
+
+.contact-info ul {
+    list-style: none;
+}
+
+.contact-info ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.contact-info ul li span {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.contact-form {
+    flex: 2;
+    padding: 40px;
+    background: #f9f9f9;
+}
+
+.contact-form form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contact-form .input-box {
+    position: relative;
+    width: calc(50% - 20px);
+    margin: 10px;
+}
+
+.contact-form .input-box input,
+.contact-form .input-box textarea {
+    width: 100%;
+    padding: 10px;
+    background: #f0f0f0;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    resize: none;
+}
+
+.contact-form .input-box textarea {
+    min-height: 120px;
+}
+
+.contact-form .input-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #999;
+}
+
+.contact-form .input-box input:focus + label,
+.contact-form .input-box input:valid + label,
+.contact-form .input-box textarea:focus + label,
+.contact-form .input-box textarea:valid + label {
+    top: -20px;
+    left: 10px;
+    color: #333;
+    font-size: 12px;
+}
+
+.contact-form .message-box {
+    width: calc(100% - 20px);
+}
+
+.contact-form .button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.contact-form .button input {
+    padding: 10px 20px;
+    background: #f74d4d;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form .button input:hover {
+    background: #e53935;
+}

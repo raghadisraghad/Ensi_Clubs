@@ -4,5 +4,7 @@
     <span><input type="text" placeholder="Search" /></span>
     <p-button icon="pi pi-search" [rounded]="true" [text]="true" severity="secondary"  />
   </div>
-  <p-button class="button" icon="pi pi-user" [rounded]="true" [text]="true" severity="secondary"/>
+  
+  <p-button class="button" icon="pi pi-cog" [rounded]="true" [text]="true" severity="secondary" routerLink="/profile"/>
+  <li (click)="logout()">Logout</li>
 </div>

@@ -1,12 +1,13 @@
 <div class="wrapper ">
    <div class="grid full-center">
       <div (click)="OnSelectClub(club)" class="column card full-center" *ngFor="let club of clubs"  >
+         @if(club.approved){
         <div class="square full-center">
          <img class="logo" src="../../../../../assets/logos/ensi.png" alt="">
          </div>
          <h2>{{club.name}}</h2>
          <p>{{club.slogan}}</p>
-
+         }
       </div>
    </div>
 </div>
