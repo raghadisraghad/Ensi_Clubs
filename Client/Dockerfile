@@ -7,7 +7,6 @@ COPY . .
 RUN npm run build --configuration=production
 
 FROM nginx:latest
-RUN rm -rf *
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/client/browser /usr/share/nginx/html
 EXPOSE 80
